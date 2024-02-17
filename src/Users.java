@@ -11,7 +11,7 @@ public class Users extends JDialog {
     private JButton iniciarSesiónButton;
     private JButton crearUsuarioButton;
     private Usuario usuarioLogueado;
-    static RegistroUsuarios lista = new RegistroUsuarios();
+
     public Users(JFrame parent) {
         super(parent);
         setTitle("Login");
@@ -20,7 +20,7 @@ public class Users extends JDialog {
         setModal(true);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        RegistroEmpleados.agregarPeluqueros();
+
 
 
 
@@ -29,15 +29,16 @@ public class Users extends JDialog {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                lista.cargarUsuarios();
+
                 if (textField1.getText().isEmpty() || textField2.getPassword().length == 0) {
                     JOptionPane.showMessageDialog(Users.this, "Por favor, completa todos los campos antes de iniciar sesión.");
                 } else {
-                    lista.cargarUsuarios();
-                    usuarioLogueado = lista.obtenerUsuario(textField1.getText(), new String(textField2.getPassword()));
+
+                    usuarioLogueado = RegistroUsuarios.obtenerUsuario(textField1.getText(), new String(textField2.getPassword()));
                     if (usuarioLogueado != null) {
                         JOptionPane.showMessageDialog(Users.this, "¡Inicio de sesión exitoso!\nBienvenido");
                         abrirMenuUsuarios(usuarioLogueado);
+                        dispose();
                     } else {
                         JOptionPane.showMessageDialog(Users.this, "Usuario no encontrado o credenciales incorrectas. Verifica la información.");
                     }
@@ -72,7 +73,7 @@ public class Users extends JDialog {
     private void verificarUsuario() {
         String codigoUsuario = textField1.getText();
         String contraseña = textField2.getText();
-        if (lista.verificarUsuario(codigoUsuario,contraseña)) {
+        if (RegistroUsuarios.verificarUsuario(codigoUsuario,contraseña)) {
             JOptionPane.showMessageDialog(this, "¡Inicio de sesión exitoso!\nBienvenido");
             return;
         }
@@ -83,12 +84,13 @@ public class Users extends JDialog {
     private void crearNuevoUsuario() {
 
         JDialog crearUsuarioDialog = new JDialog(this, "Crear Nuevo Usuario", true);
-        crearUsuarioDialog.setSize(300, 200);
-        crearUsuarioDialog.setLayout(new GridLayout(5, 2));
+        crearUsuarioDialog.setSize(300, 250);
+        crearUsuarioDialog.setLayout(new GridLayout(6, 2));
 
         JTextField nombreField = new JTextField();
         JTextField apellidoField = new JTextField();
-        JTextField contraseñaField = new JTextField(); // Añadido el campo de contraseña
+        JTextField contraseñaField = new JTextField();
+        JTextField telefonoField = new JTextField();
 
         JButton confirmarButton = new JButton("Confirmar");
         JButton cancelarButton = new JButton("Cancelar");
@@ -96,14 +98,24 @@ public class Users extends JDialog {
         confirmarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                lista.cargarContador();
-                Usuario nuevoUsuario = new Usuario(nombreField.getText(), apellidoField.getText(), contraseñaField.getText());
-                lista.agregarUsuario(nuevoUsuario);
-                lista.guardarUsuarios();
-                lista.guardarContador(nuevoUsuario.getContador());
-                crearUsuarioDialog.dispose();
-                JOptionPane.showMessageDialog(Users.this, "Nuevo usuario creado exitosamente.\nCódigo de usuario: " + nuevoUsuario.getCodigo());
+                String nombre = nombreField.getText();
+                String apellido = apellidoField.getText();
+                String contraseña = contraseñaField.getText();
+                String telefono = telefonoField.getText();
 
+                // Verificar que todos los campos estén llenos
+                if (!nombre.isEmpty() && !apellido.isEmpty() && !contraseña.isEmpty() && !telefono.isEmpty()) {
+                    RegistroUsuarios.cargarContador();
+                    Usuario nuevoUsuario = new Usuario(nombre, apellido, contraseña, telefono);
+                    RegistroUsuarios.agregarUsuario(nuevoUsuario);
+                    RegistroUsuarios.guardarUsuarios();
+                    RegistroUsuarios.guardarContador(nuevoUsuario.getContador());
+                    crearUsuarioDialog.dispose();
+                    JOptionPane.showMessageDialog(Users.this, "Nuevo usuario creado exitosamente.\nCódigo de usuario: " + nuevoUsuario.getCodigo());
+                } else {
+                    // Mostrar mensaje si algún campo está vacío
+                    JOptionPane.showMessageDialog(Users.this, "Todos los campos deben estar llenos.");
+                }
             }
         });
 
@@ -120,6 +132,8 @@ public class Users extends JDialog {
         crearUsuarioDialog.add(apellidoField);
         crearUsuarioDialog.add(new JLabel("Contraseña:"));
         crearUsuarioDialog.add(contraseñaField);
+        crearUsuarioDialog.add(new JLabel("Número de Teléfono:"));
+        crearUsuarioDialog.add(telefonoField); // Agregado el campo para el número de teléfono
         crearUsuarioDialog.add(confirmarButton);
         crearUsuarioDialog.add(cancelarButton);
 

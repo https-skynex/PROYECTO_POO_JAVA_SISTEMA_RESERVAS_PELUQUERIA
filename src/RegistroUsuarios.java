@@ -1,14 +1,14 @@
 import java.io.*;
 import java.util.*;
 public class RegistroUsuarios {
-    ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario>();
+    static ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario>();
 
-    public void agregarUsuario(Usuario usuario){
+    static public void agregarUsuario(Usuario usuario){
         listaUsuarios.add(usuario);
     }
 
 
-    public boolean verificarUsuario(String codigoUsuario, String contraseña){
+    static public boolean verificarUsuario(String codigoUsuario, String contraseña){
         for(Usuario usuario: listaUsuarios) {
             if (usuario.getCodigo().equals(codigoUsuario) && usuario.getContraseña().equals(contraseña)) {
                 return true;
@@ -17,7 +17,7 @@ public class RegistroUsuarios {
         return false;
         }
 
-    public Usuario obtenerUsuario(String codigoUsuario, String contraseña) {
+    static public Usuario obtenerUsuario(String codigoUsuario, String contraseña) {
         for (Usuario usuario : listaUsuarios) {
             if (usuario.getCodigo().equals(codigoUsuario) && usuario.getContraseña().equals(contraseña)) {
                 return usuario;
@@ -26,8 +26,13 @@ public class RegistroUsuarios {
         return null;
     }
 
+    static public void imprimirUsuarios(){
+        for(Usuario usuario: listaUsuarios){
+            System.out.println(usuario.getCodigo() + " " + usuario.getContraseña());
+        }
+    }
 
-    public void guardarUsuarios() {
+    static public void guardarUsuarios() {
         try {
             FileOutputStream fos = new FileOutputStream("usuarios.txt");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -39,13 +44,15 @@ public class RegistroUsuarios {
         }
     }
 
-    public void cargarUsuarios() {
+    static public void cargarUsuarios() {
         try {
             FileInputStream fis = new FileInputStream("usuarios.txt");
             ObjectInputStream ois = new ObjectInputStream(fis);
             listaUsuarios = (ArrayList) ois.readObject();
             ois.close();
             fis.close();
+        } catch (FileNotFoundException f){
+            System.out.println("Base de datos no encontrada, creando nueva base");
         } catch (IOException ioe) {
             ioe.printStackTrace();
         } catch (ClassNotFoundException c) {
@@ -54,7 +61,7 @@ public class RegistroUsuarios {
         }
     }
 
-    public void guardarContador(int numerador) {
+    static public void guardarContador(int numerador) {
         try {
             FileOutputStream fos = new FileOutputStream("contador.txt");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -66,13 +73,15 @@ public class RegistroUsuarios {
         }
     }
 
-    public void cargarContador() {
+    static public void cargarContador() {
         try {
             FileInputStream fis = new FileInputStream("contador.txt");
             ObjectInputStream ois = new ObjectInputStream(fis);
             Usuario.setNumerador((int) ois.readObject());
             ois.close();
             fis.close();
+        } catch (FileNotFoundException f){
+
         } catch (IOException ioe) {
             ioe.printStackTrace();
         } catch (ClassNotFoundException c) {

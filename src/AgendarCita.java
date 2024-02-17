@@ -39,23 +39,26 @@ public class AgendarCita {
                 String dia = (String) diaBox.getSelectedItem();
                 String mes = (String) mesBox.getSelectedItem();
 
-                peluquerosDisponibles = RegistroCitas.peluquerosDisponibles(hora, dia, mes);
 
-                if (peluquerosDisponibles.size() == 0) {
-                    JOptionPane.showMessageDialog(panel1, "No hay peluqueros disponibles", "Aviso", JOptionPane.WARNING_MESSAGE);
 
-                    // Limpiar los JComboBox cuando no hay peluqueros disponibles
-                    horaBox.setSelectedItem(null);
-                    diaBox.setSelectedItem(null);
-                    mesBox.setSelectedItem(null);
-                    selectPeluquero.removeAllItems();
-                } else {
-                    // Actualizar la JComboBox selectPeluquero con los peluqueros disponibles
-                    selectPeluquero.removeAllItems();
-                    for (Object peluquero : peluquerosDisponibles) {
-                        selectPeluquero.addItem((Empleado) peluquero);
+                    peluquerosDisponibles = RegistroCitas.peluquerosDisponibles(hora, dia, mes);
+
+                    if (peluquerosDisponibles.size() == 0) {
+                        JOptionPane.showMessageDialog(panel1, "No hay peluqueros disponibles", "Aviso", JOptionPane.WARNING_MESSAGE);
+
+                        // Limpiar los JComboBox cuando no hay peluqueros disponibles
+                        horaBox.setSelectedItem(null);
+                        diaBox.setSelectedItem(null);
+                        mesBox.setSelectedItem(null);
+                        selectPeluquero.removeAllItems();
+                    } else {
+                        // Actualizar la JComboBox selectPeluquero con los peluqueros disponibles
+                        selectPeluquero.removeAllItems();
+                        for (Object peluquero : peluquerosDisponibles) {
+                            selectPeluquero.addItem((Empleado) peluquero);
+                        }
                     }
-                }
+
             }
         });
 
@@ -70,23 +73,31 @@ public class AgendarCita {
                 Servicio servicioT = (Servicio) servicios.getSelectedItem();
 
                 // Validar que todos los campos estén llenos
-                if (hora == null || dia == null || mes == null || empleadoSelect == null || servicioT == null) {
+                if (hora == null || dia == null || mes == null || empleadoSelect == null || servicioT == null || usuario ==null) {
                     JOptionPane.showMessageDialog(panel1, "Llenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    // Todos los campos están llenos, agregar la cita
-                    Cita nuevaCita = new Cita(usuario, empleadoSelect, servicioT,
-                            Integer.parseInt(hora), Integer.parseInt(dia), Integer.parseInt(mes));
+                    if(RegistroCitas.choqueCitas(hora, dia, mes, usuario)) {
+                        JOptionPane.showMessageDialog(panel1, "Ya tiene una cita registrada en ese horario", "Aviso", JOptionPane.WARNING_MESSAGE);
+                        horaBox.setSelectedItem(null);
+                        diaBox.setSelectedItem(null);
+                        mesBox.setSelectedItem(null);
+                        selectPeluquero.removeAllItems();
+                    }else {
+                        // Todos los campos están llenos, agregar la cita
+                        Cita nuevaCita = new Cita(usuario, empleadoSelect, servicioT,
+                                Integer.parseInt(hora), Integer.parseInt(dia), Integer.parseInt(mes));
 
-                    RegistroCitas.agregarCita(nuevaCita);
+                        RegistroCitas.agregarCita(nuevaCita);
 
-                    // Limpiar la interfaz o realizar otras acciones según tus necesidades
-                    limpiarInterfaz();
-                    String mensaje = String.format("Cita guardada correctamente:\n%s", nuevaCita.toString());
-                    JOptionPane.showMessageDialog(panel1, mensaje, "Cita Guardada", JOptionPane.INFORMATION_MESSAGE);
+                        // Limpiar la interfaz o realizar otras acciones según tus necesidades
+                        limpiarInterfaz();
+                        String mensaje = String.format("Cita guardada correctamente:\n%s", nuevaCita.toString());
+                        JOptionPane.showMessageDialog(panel1, mensaje, "Cita Guardada", JOptionPane.INFORMATION_MESSAGE);
 
 
-                    JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(panel1);
-                    frame.dispose();
+                        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(panel1);
+                        frame.dispose();
+                    }
                 }
             }
         });
@@ -119,6 +130,7 @@ public class AgendarCita {
         }
     }
     static void inicializarServicios(ArrayList<Servicio> serviciosDisponibles) {
+
         serviciosDisponibles.add(new Servicio("Corte de pelo", 20.0));
         serviciosDisponibles.add(new Servicio("Tinte de cabello", 40.0));
         serviciosDisponibles.add(new Servicio("Tratamiento", 30.0));

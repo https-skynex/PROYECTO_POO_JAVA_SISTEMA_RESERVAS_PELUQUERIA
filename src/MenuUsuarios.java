@@ -1,13 +1,12 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MenuUsuarios {
     JPanel panel1;
     private JButton reservarCita;
     private JButton cambiarContraseña;
+    private JButton cerrarSesionButton;
     private Usuario usuario;
     private JFrame frame;
     public MenuUsuarios(JFrame frame, Usuario usuario) {
@@ -30,15 +29,44 @@ public class MenuUsuarios {
         cambiarContraseña.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (usuario != null) {
-                    JOptionPane.showMessageDialog(frame, "Nombre del usuario: " + usuario.getNombre());
-
-                } else {
-                    JOptionPane.showMessageDialog(frame, "No se ha proporcionado un usuario válido.");
-                }
+                cambiarContraseñaActionPerformed(e);
             }
         });
+
+        cerrarSesionButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+                Users users = new Users(null);
+
+            }
+
+        });
+
+        frame.setVisible(true);
     }
+
+    private void cambiarContraseñaActionPerformed(ActionEvent e) {
+        if (usuario != null) {
+            String newPassword = JOptionPane.showInputDialog(frame, "Ingrese la nueva contraseña:");
+
+            // Verifica si se ingresó una nueva contraseña
+            if (newPassword != null) {
+                usuario.setContraseña(newPassword);
+                RegistroUsuarios.guardarUsuarios();
+                // Muestra un mensaje de éxito en una nueva ventana
+                JOptionPane.showMessageDialog(frame, "Contraseña cambiada correctamente");
+
+                // Cierra la ventana actual después de cambiar la contraseña
+            } else {
+
+            }
+        } else {
+            JOptionPane.showMessageDialog(frame, "No se ha proporcionado un usuario válido.");
+        }
+    }
+
+
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {

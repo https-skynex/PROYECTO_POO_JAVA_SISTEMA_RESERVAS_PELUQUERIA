@@ -11,6 +11,20 @@ public class RegistroCitas {
         }
     }
 
+    static public boolean choqueCitas (String hora1, String dia1, String mes1, Usuario usuario) {
+        int hora = Integer.parseInt(hora1);
+        int dia = Integer.parseInt(dia1);
+        int mes = Integer.parseInt(mes1);
+        boolean choque = false;
+        for (Cita cita : listaCitas) {
+            if (hora == cita.getHora() && dia == cita.getDia() && mes == cita.getMes() && usuario == cita.getUsuario()) {
+                choque = true;
+            }
+
+        }
+        return choque;
+    }
+
     static public ArrayList<Empleado> peluquerosDisponibles(String hora1, String dia1, String mes1){
         int hora = Integer.parseInt(hora1);
         int dia = Integer.parseInt(dia1);

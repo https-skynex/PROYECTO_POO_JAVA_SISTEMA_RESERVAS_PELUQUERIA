@@ -7,6 +7,7 @@ public class Cita {
     private int dia;
     private int mes;
     private int hora;
+    private int año = 2024;
     private boolean estado;
 
 
