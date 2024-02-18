@@ -12,6 +12,11 @@ public class Peluquero extends Empleado{
         return super.getCodigo()+" "+super.getNombre() + " " +super.getApellido();
     }
 
+    public int getContador(){ return Empleado.getNumerador();}
+
+
 }
+
+
 
 

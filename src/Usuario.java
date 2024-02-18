@@ -49,9 +49,6 @@ public int getContador(){ return numerador;}
     public void setNumeroTelefono(String numeroTelefono){
         this.numeroTelefono = numeroTelefono;
     }
-    public static int getNumerador() {
-        return numerador;
-    }
 
     public static void setNumerador(int numerador) {
         Usuario.numerador = numerador;

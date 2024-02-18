@@ -32,7 +32,7 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="98715" class="javax.swing.JComboBox" binding="comboBox1" default-binding="true">
+                  <component id="98715" class="javax.swing.JComboBox" binding="añoBox">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -92,7 +92,7 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="cadd5" class="javax.swing.JComboBox" binding="comboBox2" default-binding="true">
+                  <component id="cadd5" class="javax.swing.JComboBox" binding="mesBox">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -152,7 +152,7 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="da656" class="javax.swing.JComboBox" binding="comboBox3" default-binding="true">
+                  <component id="da656" class="javax.swing.JComboBox" binding="diaBox">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -219,9 +219,9 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="673b7" class="javax.swing.JTable" binding="stats">
+              <component id="b5b08" class="javax.swing.JTable" binding="table1" default-binding="true">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="1" use-parent-layout="false">
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="50"/>
                   </grid>
                 </constraints>

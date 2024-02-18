@@ -4,7 +4,7 @@ public abstract class Empleado implements Serializable {
     private String nombre;
     private String apellido;
     private String contraseña;
-    private static int numerador = 99;
+    private static int numerador = 100;
     private final String codigo;
     public Empleado(String nombre, String apellido, String contraseña){
         numerador++;
@@ -40,9 +40,17 @@ public abstract class Empleado implements Serializable {
 
     public String getEspecialidad(){ return  null; }
 
+    public static int getNumerador() {
+        return numerador;
+    }
 
-
+    public static void setNumerador(int numerador) {
+        Empleado.numerador = numerador;
+    }
 }
+
+
+
 
 
 

@@ -23,8 +23,6 @@ public class Users extends JDialog {
 
 
 
-
-
         iniciarSesiónButton.addActionListener(new ActionListener() {
 
             @Override
