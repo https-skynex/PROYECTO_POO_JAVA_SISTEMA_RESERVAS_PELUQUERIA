@@ -72,11 +72,10 @@ public class MenuAdmin extends JDialog {
 
                 // Verificar que todos los campos estén llenos
                 if (!nombre.isEmpty() && !apellido.isEmpty() && !contraseña.isEmpty()) {
-                    RegistroEmpleados.cargarContadorE();
                     Peluquero peluquero = new Peluquero(nombre, apellido, contraseña);
                     RegistroEmpleados.nuevoPeluquero(peluquero);
-                    RegistroEmpleados.guardarEmpleados();
                     RegistroEmpleados.guardarContadorE(peluquero.getContador());
+                    RegistroEmpleados.guardarEmpleados();
                     JOptionPane.showMessageDialog(MenuAdmin.this, "Nuevo empleado creado exitosamente.\n " + "Codigo de acceso: " + peluquero.getCodigo());
                     agregarEmpleadoDialog.dispose();
                 } else {

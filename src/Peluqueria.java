@@ -3,13 +3,23 @@ import java.util.*;
 
 public class Peluqueria {
     public static void main (String[] args){
-        //RegistroUsuarios.cargarUsuarios();
+        RegistroUsuarios.cargarUsuarios();
+        RegistroUsuarios.cargarContador();
         RegistroEmpleados.cargarEmpleados();
-        //RegistroUsuarios.imprimirUsuarios();
+        RegistroEmpleados.cargarContadorE();
+        RegistroCitas.cargarCitas();
+        RegistroUsuarios.imprimirUsuarios();
         RegistroEmpleados.imprimirEmpleados();
+
         //RegistroEmpleados.agregarPeluqueros();
-        //Users users = new Users(null);
-        Admin.mostrarAdmin();
+        RegistroCitas.mostrarCitas();
+        Users users = new Users(null);
+        //Admin.mostrarAdmin();
+        //RegistroCitas.mostrarCitas();
+
+
+
+
 
     }
 }

@@ -1,6 +1,8 @@
+import java.io.Serializable;
 import java.util.*;
+import java.io.Serializable;
 
-public class Cita {
+public class Cita implements Serializable {
     private Usuario usuario;
     private Empleado empleado;
     private Servicio servicio;
@@ -43,10 +45,12 @@ public class Cita {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cita cita = (Cita) o;
-        return dia == cita.dia && mes == cita.mes  && hora == cita.hora &&
+        return dia == cita.dia && mes == cita.mes && hora == cita.hora &&
                 Objects.equals(usuario, cita.usuario) &&
-                Objects.equals(empleado, cita.empleado);
+                Objects.equals(empleado, cita.empleado) &&
+                Objects.equals(servicio, cita.servicio);
     }
+
 
     @Override
     public int hashCode() {
@@ -59,12 +63,11 @@ public class Cita {
         }else{
             return empleado;
         }
-
     }
 
     @Override
     public String toString(){
-        return  "Peluquero: " + empleado + "\nServicio: " + servicio + "\nHora: " + hora + "\nDia: " + dia + "\nMes: " + mes;
+        return   "Cliente: " + usuario +"\nPeluquero: " + empleado + "\nServicio: " + servicio + "\nHora: " + hora + "\nDia: " + dia + "\nMes: " + mes;
 
     }
 

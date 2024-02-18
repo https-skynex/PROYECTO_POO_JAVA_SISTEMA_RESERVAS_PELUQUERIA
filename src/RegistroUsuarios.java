@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.*;
+
 public class RegistroUsuarios {
     static ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario>();
 

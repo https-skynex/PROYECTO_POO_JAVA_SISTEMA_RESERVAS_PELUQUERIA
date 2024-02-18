@@ -9,10 +9,9 @@ public class MenuUsuarios {
     private JButton cerrarSesionButton;
     private Usuario usuario;
     private JFrame frame;
-    public MenuUsuarios(JFrame frame, Usuario usuario) {
-
+    public MenuUsuarios(JFrame frame, Usuario user) {
         this.frame = frame;
-        this.usuario = usuario;
+        this.usuario = user;
         frame.setTitle("Menú de Usuarios");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setContentPane(panel1);
@@ -22,7 +21,8 @@ public class MenuUsuarios {
         reservarCita.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                AgendarCita agendarCita = new AgendarCita();
+                RegistroCitas registroCitas = new RegistroCitas();
+                AgendarCita agendarCita = new AgendarCita(registroCitas);
                 agendarCita.mostrarVentana(usuario);
             }
         });
@@ -53,7 +53,7 @@ public class MenuUsuarios {
             // Verifica si se ingresó una nueva contraseña
             if (newPassword != null) {
                 usuario.setContraseña(newPassword);
-                RegistroUsuarios.guardarUsuarios();
+
                 // Muestra un mensaje de éxito en una nueva ventana
                 JOptionPane.showMessageDialog(frame, "Contraseña cambiada correctamente");
 

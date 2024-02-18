@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -21,14 +22,17 @@ public class AgendarCita {
     private Servicio servicio;
     private ArrayList<Empleado> peluqueros;
     private ArrayList<Servicio> serviciosDisponibles ;
-    ArrayList peluquerosDisponibles = new ArrayList<>();
+    private ArrayList peluquerosDisponibles;
 
 
-    public AgendarCita() {
+    public AgendarCita(RegistroCitas registroCitas) {
+        this.registroCitas = registroCitas;
+        //RegistroCitas.mostrarCitas();
 
         peluqueros = RegistroEmpleados.exportarPeluqueros();
         peluquerosDisponibles = new ArrayList<>();
         serviciosDisponibles = new ArrayList<>();
+
         inicializarServicios(serviciosDisponibles);
         agregarServicios();
 
@@ -38,8 +42,6 @@ public class AgendarCita {
                 String hora = (String) horaBox.getSelectedItem();
                 String dia = (String) diaBox.getSelectedItem();
                 String mes = (String) mesBox.getSelectedItem();
-
-
 
                     peluquerosDisponibles = RegistroCitas.peluquerosDisponibles(hora, dia, mes);
 
@@ -84,19 +86,15 @@ public class AgendarCita {
                         selectPeluquero.removeAllItems();
                     }else {
                         // Todos los campos están llenos, agregar la cita
-                        Cita nuevaCita = new Cita(usuario, empleadoSelect, servicioT,
-                                Integer.parseInt(hora), Integer.parseInt(dia), Integer.parseInt(mes));
-
+                        Cita nuevaCita = new Cita(usuario, empleadoSelect, servicioT, Integer.parseInt(hora), Integer.parseInt(dia), Integer.parseInt(mes));
                         RegistroCitas.agregarCita(nuevaCita);
-
-                        // Limpiar la interfaz o realizar otras acciones según tus necesidades
-                        limpiarInterfaz();
+                        RegistroCitas.guardarCitas();
                         String mensaje = String.format("Cita guardada correctamente:\n%s", nuevaCita.toString());
                         JOptionPane.showMessageDialog(panel1, mensaje, "Cita Guardada", JOptionPane.INFORMATION_MESSAGE);
 
 
                         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(panel1);
-                        frame.dispose();
+                        frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
                     }
                 }
             }
@@ -120,7 +118,6 @@ public class AgendarCita {
         frame.setSize(720, 720); // Establece el tamaño deseado
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-
     }
 
 
@@ -142,7 +139,8 @@ public class AgendarCita {
             @Override
             public void run() {
                 JFrame frame = new JFrame("Agendar Cita");
-                frame.setContentPane(new AgendarCita().panel1);
+                RegistroCitas registroCitas = new RegistroCitas();
+                frame.setContentPane(new AgendarCita(registroCitas).panel1);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.pack();
                 frame.setLocationRelativeTo(null);

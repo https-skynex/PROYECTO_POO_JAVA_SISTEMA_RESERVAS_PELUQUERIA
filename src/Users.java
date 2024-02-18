@@ -36,6 +36,7 @@ public class Users extends JDialog {
                     if (usuarioLogueado != null) {
                         JOptionPane.showMessageDialog(Users.this, "¡Inicio de sesión exitoso!\nBienvenido");
                         abrirMenuUsuarios(usuarioLogueado);
+                        System.out.println(usuarioLogueado.toString());
                         dispose();
                     } else {
                         JOptionPane.showMessageDialog(Users.this, "Usuario no encontrado o credenciales incorrectas. Verifica la información.");
@@ -103,11 +104,10 @@ public class Users extends JDialog {
 
                 // Verificar que todos los campos estén llenos
                 if (!nombre.isEmpty() && !apellido.isEmpty() && !contraseña.isEmpty() && !telefono.isEmpty()) {
-                    RegistroUsuarios.cargarContador();
                     Usuario nuevoUsuario = new Usuario(nombre, apellido, contraseña, telefono);
                     RegistroUsuarios.agregarUsuario(nuevoUsuario);
-                    RegistroUsuarios.guardarUsuarios();
                     RegistroUsuarios.guardarContador(nuevoUsuario.getContador());
+                    RegistroUsuarios.guardarUsuarios();
                     crearUsuarioDialog.dispose();
                     JOptionPane.showMessageDialog(Users.this, "Nuevo usuario creado exitosamente.\nCódigo de usuario: " + nuevoUsuario.getCodigo());
                 } else {

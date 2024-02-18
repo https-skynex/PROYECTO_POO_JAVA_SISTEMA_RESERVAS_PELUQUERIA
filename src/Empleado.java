@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.Objects;
 
 public abstract class Empleado implements Serializable {
     private String nombre;
@@ -46,6 +47,18 @@ public abstract class Empleado implements Serializable {
 
     public static void setNumerador(int numerador) {
         Empleado.numerador = numerador;
+    }
+
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Empleado empleado = (Empleado) o;
+        return Objects.equals(codigo, empleado.codigo);  // Asegúrate de comparar todos los atributos relevantes
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(codigo);  // Asegúrate de incluir todos los atributos relevantes
     }
 }
 
