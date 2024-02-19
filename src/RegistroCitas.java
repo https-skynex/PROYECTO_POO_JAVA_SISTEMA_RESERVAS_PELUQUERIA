@@ -9,6 +9,7 @@ public class RegistroCitas {
     }
     static public void agregarCita(Cita cita) {
         if (!listaCitas.contains(cita)) {
+            System.out.println(cita.getServicio().toString());
             listaCitas.add(cita);
         } else {
             System.out.println("Ya hay una cita registrada para ese peluquero, día y hora.");
@@ -88,7 +89,29 @@ public class RegistroCitas {
         return suma;
     }
 
+    static public int cantidadClientesDia(int dia, String mes, String año){
+        int suma =0;
+        int añoC = Integer.parseInt(año);
+        int mesC = Integer.parseInt(mes);
+        for(Cita cita : listaCitas){
+            if(dia == cita.getDia() &&  mesC == cita.getMes()&&añoC == cita.getAño()){
+                suma++;
+            }
+        }
+        return suma;
+    }
 
+    static public double cantidadGananciasDia(int dia, String mes, String año){
+        double suma =0;
+        int añoC = Integer.parseInt(año);
+        int mesC = Integer.parseInt(mes);
+        for(Cita cita : listaCitas){
+            if(dia == cita.getDia() &&  mesC == cita.getMes()&&añoC == cita.getAño()){
+                suma = suma + cita.getServicio().getPrecio();
+            }
+        }
+        return suma;
+    }
 
     static public void guardarCitas() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("citas.txt"))) {

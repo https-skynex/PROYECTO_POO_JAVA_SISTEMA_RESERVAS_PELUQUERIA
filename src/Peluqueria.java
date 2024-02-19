@@ -8,12 +8,12 @@ public class Peluqueria {
         RegistroEmpleados.cargarEmpleados();
         RegistroEmpleados.cargarContadorE();
         RegistroCitas.cargarCitas();
-        RegistroUsuarios.imprimirUsuarios();
-        RegistroEmpleados.imprimirEmpleados();
+        //RegistroUsuarios.imprimirUsuarios();
+        //RegistroEmpleados.imprimirEmpleados();
 
         //RegistroEmpleados.agregarPeluqueros();
-        RegistroCitas.mostrarCitas();
-        //Users users = new Users(null);
+        //RegistroCitas.mostrarCitas();
+       // Users users = new Users(null);
         Admin.mostrarAdmin();
         //RegistroCitas.mostrarCitas();
 

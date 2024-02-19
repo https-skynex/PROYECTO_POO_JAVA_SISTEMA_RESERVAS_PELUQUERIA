@@ -29,15 +29,18 @@ public class EstadisticasNegocio {
                 String mes = (String) mesBox.getSelectedItem();
                 String dia = (String) diaBox.getSelectedItem();
 
-
-
                 // Verificar si año o mes están vacíos
-                if ((año == null || año.isEmpty()) && (mes == null || mes.isEmpty())) {
-                    JOptionPane.showMessageDialog(panel1, "Rellenar los campos de año y mes", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                if ((año == null || año.isEmpty())) {
+                    JOptionPane.showMessageDialog(panel1, "Rellenar los campos de año", "Advertencia", JOptionPane.WARNING_MESSAGE);
                     return;
-                } else if ((año == null || año.isEmpty())){
-                    JOptionPane.showMessageDialog(panel1, "Rellenar el campo de año ", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                } else if ((año != null || !año.isEmpty()) && (mes == null || mes.isEmpty())){
+                    JOptionPane.showMessageDialog(panel1, "Rellenar el campo de año y mes ", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                    return;
+                } else if ((año == null || año.isEmpty()) || (mes == null || mes.isEmpty()) && (dia != null || !dia.isEmpty())){
+                    JOptionPane.showMessageDialog(panel1, "Rellenar el campo de mes ", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                    return;
                 }
+
 
 
                 if ((dia == null || dia.isEmpty()) && (mes == null || mes.isEmpty())) {
@@ -71,9 +74,39 @@ public class EstadisticasNegocio {
                         System.out.println();  // Salto de línea después de cada fila
                     }
 
-                } else if ((dia == null || dia.isEmpty())) {
+                } else if ((dia == null || dia.isEmpty())&&(mes != null || !mes.isEmpty())) {
 
-                } else {
+                    Object[][] data = new Object[31][3];
+                    data [0][0] = "Dia";
+                    data [0][1] = "Cantida de clientes";
+                    data [0][2] = "Ganancias";
+                    for (int i = 1; i <= 30; i++) {
+                        // Asignar los valores a cada celda del arreglo
+                        data[i][0] = i ;  // Suma 1 al índice para que represente correctamente el mes
+                        data[i][1] = RegistroCitas.cantidadClientesDia(i, mes, año);
+                        data[i][2] = RegistroCitas.cantidadGananciasDia(i, mes, año);
+                    }
+                    Object[] columnNames = {"Dia", "Cantidad de Clientes", "Ganancias"};
+
+                    // Crear una nueva instancia de CustomTableModel con datos y nombres de columna
+                    tableModel = new CustomTableModel(data, columnNames);
+
+                    // Establecer el modelo de la tabla
+                    table1.setModel(tableModel);
+
+                    // Notificar que los datos de la tabla han cambiado
+                    tableModel.setData(data);
+
+                    // Imprimir los valores de la matriz data
+                    for (int i = 0; i < data.length; i++) {
+                        for (int j = 0; j < data[i].length; j++) {
+                            System.out.print(data[i][j] + " ");
+                        }
+                        System.out.println();  // Salto de línea después de cada fila
+                    }
+
+
+                } else if ((dia != null ||! dia.isEmpty())&&(mes != null || !mes.isEmpty())){
 
                 }
             }
