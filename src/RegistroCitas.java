@@ -4,7 +4,9 @@ import java.util.*;
 public class RegistroCitas {
     static private ArrayList<Cita> listaCitas = new ArrayList<>();
 
-
+    static public ArrayList obtenerRegistroCitas(){
+        return listaCitas;
+    }
     static public void agregarCita(Cita cita) {
         if (!listaCitas.contains(cita)) {
             listaCitas.add(cita);
@@ -63,6 +65,30 @@ public class RegistroCitas {
             System.out.println(cita.toString());
         }
     }
+
+    static public int cantidadClientesMes(int mes, String año){
+        int suma =0;
+        int añoC = Integer.parseInt(año);
+        for(Cita cita : listaCitas){
+            if(mes == cita.getMes() && añoC == cita.getAño()){
+                suma++;
+            }
+        }
+        return suma;
+    }
+
+    static public double cantidadGananciasMes(int mes, String año){
+        double suma =0;
+        int añoC = Integer.parseInt(año);
+        for(Cita cita : listaCitas){
+            if(mes == cita.getMes() && añoC == cita.getAño()){
+                suma = suma + cita.getServicio().getPrecio();
+            }
+        }
+        return suma;
+    }
+
+
 
     static public void guardarCitas() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("citas.txt"))) {

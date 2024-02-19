@@ -35,6 +35,15 @@ public class MenuAdmin extends JDialog {
             }
         });
 
+        visualizarEstadisticasDelNegocioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                RegistroCitas registroCitas = new RegistroCitas();
+                EstadisticasNegocio stats = new EstadisticasNegocio(frame, registroCitas);
+                stats.mostrarVentana();
+            }
+        });
+
         setVisible(true);
     }
     private void cerrarSesion() {

@@ -40,6 +40,10 @@ public class Cita implements Serializable {
         return servicio;
     }
 
+    public int getAño() {
+        return año;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

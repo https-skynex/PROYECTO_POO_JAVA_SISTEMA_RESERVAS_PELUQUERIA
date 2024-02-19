@@ -13,8 +13,8 @@ public class Peluqueria {
 
         //RegistroEmpleados.agregarPeluqueros();
         RegistroCitas.mostrarCitas();
-        Users users = new Users(null);
-        //Admin.mostrarAdmin();
+        //Users users = new Users(null);
+        Admin.mostrarAdmin();
         //RegistroCitas.mostrarCitas();
 
 
