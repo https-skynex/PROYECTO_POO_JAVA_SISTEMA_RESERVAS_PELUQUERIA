@@ -5,11 +5,19 @@ import java.util.ArrayList;
 public class RegistroEmpleados {
 
     static ArrayList<Empleado> listaEmpleados = new ArrayList<Empleado>();
-    static public void agregarPeluqueros(){
-        Empleado peluquero1 = new Peluquero("Carlos", "Lopez","peluquero1");
-        Empleado peluquero2 = new Peluquero("Mirlos", "Lopez","peluquero2");
-        listaEmpleados.add(peluquero1);
-        listaEmpleados.add(peluquero2);
+
+    static public int cantidadEmpleados(){
+        return listaEmpleados.size();
+    }
+
+    static public String getCodigoEmpleado(int i){
+        return listaEmpleados.get(i).getCodigo();
+    }
+
+    static public String getNombreEmpleado(int i){
+        String nombre = listaEmpleados.get(i).getNombre();
+        String apellido = listaEmpleados.get(i).getApellido();
+        return nombre + " " + apellido;
     }
 
     static public void nuevoPeluquero(Peluquero peluquero){

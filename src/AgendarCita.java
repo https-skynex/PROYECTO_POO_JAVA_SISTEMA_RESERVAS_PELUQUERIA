@@ -1,8 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -38,6 +36,7 @@ public class AgendarCita {
                 String hora = (String) horaBox.getSelectedItem();
                 String dia = (String) diaBox.getSelectedItem();
                 String mes = (String) mesBox.getSelectedItem();
+                selectPeluquero.removeAllItems();
 
                     peluquerosDisponibles = RegistroCitas.peluquerosDisponibles(hora, dia, mes);
 
@@ -92,6 +91,32 @@ public class AgendarCita {
                         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
                     }
                 }
+            }
+        });
+
+        horaBox.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                // Limpiar los JComboBox selectPeluquero cuando cambie la hora
+                selectPeluquero.removeAllItems();
+            }
+        });
+
+        // Agregar ItemListener a diaBox
+        diaBox.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                // Limpiar los JComboBox selectPeluquero cuando cambie el día
+                selectPeluquero.removeAllItems();
+            }
+        });
+
+        // Agregar ItemListener a mesBox
+        mesBox.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                // Limpiar los JComboBox selectPeluquero cuando cambie el mes
+                selectPeluquero.removeAllItems();
             }
         });
 

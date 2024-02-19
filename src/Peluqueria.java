@@ -9,12 +9,16 @@ public class Peluqueria {
         RegistroEmpleados.cargarContadorE();
         RegistroCitas.cargarCitas();
         //RegistroUsuarios.imprimirUsuarios();
-        //RegistroEmpleados.imprimirEmpleados();
+        RegistroEmpleados.imprimirEmpleados();
+        System.out.println(RegistroEmpleados.cantidadEmpleados());
 
+        //System.out.println(RegistroEmpleados.getNombreEmpleado(0));
+        //System.out.println(RegistroEmpleados.cantidadEmpleados());
         //RegistroEmpleados.agregarPeluqueros();
         //RegistroCitas.mostrarCitas();
-       // Users users = new Users(null);
-        Admin.mostrarAdmin();
+        //Admin.mostrarAdmin();
+      //Users users = new Users(null);
+      Admin.mostrarAdmin();
         //RegistroCitas.mostrarCitas();
 
 

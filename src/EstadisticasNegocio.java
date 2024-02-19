@@ -30,14 +30,14 @@ public class EstadisticasNegocio {
                 String dia = (String) diaBox.getSelectedItem();
 
                 // Verificar si año o mes están vacíos
-                if ((año == null || año.isEmpty())) {
-                    JOptionPane.showMessageDialog(panel1, "Rellenar los campos de año", "Advertencia", JOptionPane.WARNING_MESSAGE);
-                    return;
-                } else if ((año != null || !año.isEmpty()) && (mes == null || mes.isEmpty())){
+                if ((año.isEmpty()) && ( mes.isEmpty()) && (!dia.isEmpty())) {
                     JOptionPane.showMessageDialog(panel1, "Rellenar el campo de año y mes ", "Advertencia", JOptionPane.WARNING_MESSAGE);
                     return;
-                } else if ((año == null || año.isEmpty()) || (mes == null || mes.isEmpty()) && (dia != null || !dia.isEmpty())){
+                } else if ((!año.isEmpty()) && (mes.isEmpty()) && (!dia.isEmpty())){
                     JOptionPane.showMessageDialog(panel1, "Rellenar el campo de mes ", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                    return;
+                } else if ((año.isEmpty())){
+                    JOptionPane.showMessageDialog(panel1, "Rellenar el campo de año ", "Advertencia", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
 
@@ -51,9 +51,9 @@ public class EstadisticasNegocio {
                     data [0][2] = "Ganancias";
                     for (int i = 1; i <= 12; i++) {
                         // Asignar los valores a cada celda del arreglo
-                        data[i][0] = i ;  // Suma 1 al índice para que represente correctamente el mes
+                        data[i][0] = obtenerMes(i) ;  // Suma 1 al índice para que represente correctamente el mes
                         data[i][1] = RegistroCitas.cantidadClientesMes(i, año);
-                        data[i][2] = RegistroCitas.cantidadGananciasMes(i, año);
+                        data[i][2] = "$ "+RegistroCitas.cantidadGananciasMes(i, año);
                     }
                     Object[] columnNames = {"Mes", "Cantidad de Clientes", "Ganancias"};
 
@@ -107,27 +107,61 @@ public class EstadisticasNegocio {
 
 
                 } else if ((dia != null ||! dia.isEmpty())&&(mes != null || !mes.isEmpty())){
+                    RegistroEmpleados.imprimirEmpleados();
+                    System.out.println(RegistroEmpleados.cantidadEmpleados());
+
+                    Object[][] data = new Object[RegistroEmpleados.cantidadEmpleados()+1][4];
+                    data [0][0] = "Codigo de empleado";
+                    data [0][1] = "Nombre";
+                    data [0][2] = "Cantidad de clientes";
+                    data [0][3] = "Ganancias";
+                    for (int i = 1; i <= RegistroEmpleados.cantidadEmpleados(); i++) {
+                        // Asignar los valores a cada celda del arreglo
+                        data[i][0] = RegistroEmpleados.getCodigoEmpleado(i-1);
+                        data[i][1] = RegistroEmpleados.getNombreEmpleado(i-1);
+                        data[i][2] = RegistroCitas.cantidadClientesporEmpleado(i-1, dia ,mes, año);
+                        data[i][3] = RegistroCitas.cantidadGananciasporEmpleado(i-1, dia ,mes, año);
+                    }
+
+                    Object[] columnNames = {"Codigo de empleado", "Nombre", "Cantidad de clientes ", "Ganancias"};
+
+                    // Crear una nueva instancia de CustomTableModel con datos y nombres de columna
+                    tableModel = new CustomTableModel(data, columnNames);
+
+                    // Establecer el modelo de la tabla
+                    table1.setModel(tableModel);
+
+                    // Notificar que los datos de la tabla han cambiado
+                    tableModel.setData(data);
+
+                    // Imprimir los valores de la matriz data
+                    for (int i = 0; i < data.length; i++) {
+                        for (int j = 0; j < data[i].length; j++) {
+                            System.out.print(data[i][j] + " ");
+                        }
+                        System.out.println();  // Salto de línea después de cada fila
+                    }
 
                 }
             }
 
-            private ArrayList<Cita> obtenerCitasFiltradas(RegistroCitas registroCitas, String año, String mes, String dia) {
-                if (dia == null || dia.isEmpty()) {
+            private String obtenerMes(int i){
+                if (i == 1){return "Enero";}
+                else if (i == 2){return "Febrero";}
+                else if (i == 3){return "Marzo";}
+                else if (i == 4){return "Abril";}
+                else if (i == 5){return "Mayo";}
+                else if (i == 6){return "Junio";}
+                else if (i == 7){return "Julio";}
+                else if (i == 8){return "Agosto";}
+                else if (i == 9){return "Septiembre";}
+                else if (i == 10){return "Octubre";}
+                else if (i == 11){return "Noviembre";}
+                else if (i == 12){return "Diciembre";}
+                else {return null;}
 
-                } else if ((dia == null || dia.isEmpty() )&& (mes.isEmpty()|| mes == null)) {
-
-                } else {
-
-                }
-                return null;
             }
 
-            private Object[][] procesarCitas(ArrayList<Cita> citas) {
-                // Implementa lógica para procesar las citas y obtener datos para la tabla
-                // Puedes usar un bucle y otras estructuras de datos según lo necesario
-                // Devuelve una matriz bidimensional con los datos procesados
-                return new Object[0][];
-            }
         });
     }
 

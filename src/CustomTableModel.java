@@ -13,19 +13,6 @@ public class CustomTableModel extends DefaultTableModel {
     }
 
     // Método para cambiar la estructura de la tabla
-    public void setTableStructure(Object[][] newData, Object[] newColumnNames) {
-        // Limpiar datos existentes
-        setRowCount(0);
-        setColumnIdentifiers(newColumnNames);
-
-        // Agregar nuevos datos
-        for (Object[] row : newData) {
-            addRow(row);
-        }
-
-        // Notificar que la estructura de la tabla ha cambiado
-        fireTableStructureChanged();
-    }
 
     // Método para establecer nuevos datos en la tabla
     public void setData(Object[][] newData) {

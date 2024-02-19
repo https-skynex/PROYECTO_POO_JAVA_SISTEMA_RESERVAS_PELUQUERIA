@@ -16,6 +16,7 @@ public class RegistroCitas {
         }
     }
 
+
     static public boolean choqueCitas (String hora1, String dia1, String mes1, Usuario usuario) {
         System.out.println( hora1 + dia1 + mes1 + usuario);
         int hora = Integer.parseInt(hora1);
@@ -113,6 +114,43 @@ public class RegistroCitas {
         return suma;
     }
 
+    static public int cantidadClientesporEmpleado(int nEmpleado, String dia, String mes, String año){
+        int suma =0;
+        int añoC = Integer.parseInt(año);
+        int mesC = Integer.parseInt(mes);
+        int diaC = Integer.parseInt(dia);
+        if (nEmpleado >= 0 && nEmpleado < RegistroEmpleados.cantidadEmpleados()) {
+            for(Cita cita : listaCitas){
+                if (RegistroEmpleados.getCodigoEmpleado(nEmpleado).equals(cita.getEmpleado().getCodigo()) &&
+                        diaC == cita.getDia() &&  mesC == cita.getMes() && añoC == cita.getAño()){
+                    suma++;
+                }
+            }
+        } else {
+            System.out.println("Índice de empleado fuera de rango.");
+        }
+
+        return suma;
+    }
+
+    static public double cantidadGananciasporEmpleado(int nEmpleado, String dia, String mes, String año){
+        double suma =0;
+        int añoC = Integer.parseInt(año);
+        int mesC = Integer.parseInt(mes);
+        int diaC = Integer.parseInt(dia);
+        if (nEmpleado >= 0 && nEmpleado < RegistroEmpleados.cantidadEmpleados()) {
+            for(Cita cita : listaCitas){
+                if (RegistroEmpleados.getCodigoEmpleado(nEmpleado).equals(cita.getEmpleado().getCodigo()) &&
+                        diaC == cita.getDia() &&  mesC == cita.getMes() && añoC == cita.getAño()){
+                    suma = suma + cita.getServicio().getPrecio();
+                }
+            }
+        } else {
+            System.out.println("Índice de empleado fuera de rango.");
+        }
+
+        return suma;
+    }
     static public void guardarCitas() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("citas.txt"))) {
             oos.writeObject(listaCitas);
