@@ -44,6 +44,14 @@ public class Cita implements Serializable {
         return año;
     }
 
+    public boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
 
     @Override
     public boolean equals(Object o) {

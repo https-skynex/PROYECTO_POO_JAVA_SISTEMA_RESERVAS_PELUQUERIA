@@ -68,6 +68,20 @@ public class RegistroCitas {
         }
     }
 
+    static public ArrayList<Cita> citasPorEmpleados(String dia, String mes, String año, Empleado empleado){
+        int añoC = Integer.parseInt(año);
+        int mesC = Integer.parseInt(mes);
+        int diaC = Integer.parseInt(dia);
+        ArrayList<Cita> lista = new ArrayList<Cita>();
+        for (Cita cita : listaCitas) {
+            if (empleado.equals(cita.getEmpleado()) &&
+                    diaC == cita.getDia() && mesC == cita.getMes() && añoC == cita.getAño()) {
+                lista.add(cita);
+            }
+        }
+        return lista;
+    }
+
 
     public static int cantidadCitasPorEmpleado(String dia, String mes, String año, Empleado empleado) {
         int suma = 0;

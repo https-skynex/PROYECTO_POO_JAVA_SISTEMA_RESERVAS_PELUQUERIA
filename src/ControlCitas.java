@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class ControlCitas {
     private JPanel panel1;
@@ -16,6 +17,7 @@ public class ControlCitas {
     private Frame frame;
     private CustomTableModel tableModel;
     private Empleado empleado;
+    private ArrayList<Cita> registroCitasPorEmpleado;
 
 
     public ControlCitas() {
@@ -34,21 +36,28 @@ public class ControlCitas {
 
                     RegistroEmpleados.imprimirEmpleados();
                     System.out.println(RegistroCitas.cantidadCitasPorEmpleado(dia, mes, año, empleado));
-
-                    Object[][] data = new Object[RegistroEmpleados.cantidadEmpleados()+1][4];
-                    data [0][0] = "Codigo de empleado";
+                    registroCitasPorEmpleado = new ArrayList<Cita>();
+                    registroCitasPorEmpleado = RegistroCitas.citasPorEmpleados(dia, mes, año, empleado);
+                    Object[][] data = new Object[registroCitasPorEmpleado.size()+1][6];
+                    data [0][0] = "Codigo Cliente";
                     data [0][1] = "Nombre";
-                    data [0][2] = "Cantidad de clientes";
-                    data [0][3] = "Ganancias";
-                    for (int i = 1; i <= RegistroEmpleados.cantidadEmpleados(); i++) {
+                    data [0][2] = "horario";
+                    data [0][3] = "Servicio";
+                    data [0][4] = "Precio";
+                    data [0][5] = "Confirmacion";
+                    int i = 0;
+                    for (Cita cita : registroCitasPorEmpleado) {
+                        i++;
                         // Asignar los valores a cada celda del arreglo
-                        data[i][0] = RegistroEmpleados.getCodigoEmpleado(i-1);
-                        data[i][1] = RegistroEmpleados.getNombreEmpleado(i-1);
-                        data[i][2] = RegistroCitas.cantidadClientesporEmpleado(i-1, dia ,mes, año);
-                        data[i][3] = RegistroCitas.cantidadGananciasporEmpleado(i-1, dia ,mes, año);
+                        data[i][0] = cita.getUsuario().getCodigo();
+                        data[i][1] = cita.getUsuario().getNombre();
+                        data[i][2] = cita.getHora();
+                        data[i][3] = cita.getServicio().getNombre();
+                        data[i][4] = cita.getServicio().getPrecio();
+                        data[i][5] = cita.getEstado();
                     }
-
-                    Object[] columnNames = {"Codigo de empleado", "Nombre", "Cantidad de clientes ", "Ganancias"};
+                    Object[] columnNames = {"Codigo de cliente", "Nombre", "horario ", "Servicio",
+                    "Precio", "Confirmacion"};
 
                     // Crear una nueva instancia de CustomTableModel con datos y nombres de columna
                     tableModel = new CustomTableModel(data, columnNames);
@@ -60,22 +69,15 @@ public class ControlCitas {
                     tableModel.setData(data);
 
                     // Imprimir los valores de la matriz data
-                    for (int i = 0; i < data.length; i++) {
+                    /*for (int i = 0; i < data.length; i++) {
                         for (int j = 0; j < data[i].length; j++) {
                             System.out.print(data[i][j] + " ");
                         }
                         System.out.println();  // Salto de línea después de cada fila
-
-
-                }
+                    }*/
             }
-
         });
-
-
     }
-
-
     public void mostrarVentanaCitas(Empleado empleado) {
         this.empleado = empleado;
         JFrame frame = new JFrame("Stats");
@@ -84,9 +86,7 @@ public class ControlCitas {
         frame.setSize(720, 720);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-
     }
-
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
