@@ -17,9 +17,9 @@ public class Peluqueria {
         //RegistroEmpleados.agregarPeluqueros();
         //RegistroCitas.mostrarCitas();
         //Admin.mostrarAdmin();
-      Users users = new Users(null);
+      //Users users = new Users(null);
       //Admin.mostrarAdmin();
-      //  LoginPeluquero loginPeluquero = new LoginPeluquero(null);
+      LoginPeluquero loginPeluquero = new LoginPeluquero(null);
         RegistroCitas.mostrarCitas();
 
     }

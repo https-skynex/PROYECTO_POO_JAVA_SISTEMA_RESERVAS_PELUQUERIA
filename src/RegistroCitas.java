@@ -68,6 +68,21 @@ public class RegistroCitas {
         }
     }
 
+
+    public static int cantidadCitasPorEmpleado(String dia, String mes, String año, Empleado empleado) {
+        int suma = 0;
+        int añoC = Integer.parseInt(año);
+        int mesC = Integer.parseInt(mes);
+        int diaC = Integer.parseInt(dia);
+            for (Cita cita : listaCitas) {
+                if (empleado.equals(cita.getEmpleado()) &&
+                        diaC == cita.getDia() && mesC == cita.getMes() && añoC == cita.getAño()) {
+                    suma++;
+                }
+            }
+            return suma;
+    }
+
     static public int cantidadClientesMes(int mes, String año){
         int suma =0;
         int añoC = Integer.parseInt(año);
@@ -151,6 +166,7 @@ public class RegistroCitas {
 
         return suma;
     }
+
     static public void guardarCitas() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("citas.txt"))) {
             oos.writeObject(listaCitas);

@@ -2,43 +2,43 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MenuUsuarios {
-    JPanel panel1;
-    private JButton reservarCita;
-    private JButton cambiarContraseña;
+public class MenuPeluqueros {
     private JButton cerrarSesionButton;
-    private Usuario usuario;
+    private JButton cambiarContraseñaButton;
+    protected JPanel panel1;
+    private JButton visualizarCitasButtom;
     private JFrame frame;
-    public MenuUsuarios(JFrame frame, Usuario user) {
+    private Empleado empleado;
+
+    public MenuPeluqueros(JFrame frame, Empleado empleado) {
         this.frame = frame;
-        this.usuario = user;
-        frame.setTitle("Menú de Usuarios");
+        this.empleado = empleado;
+        frame.setTitle("Menú de peluquero");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setContentPane(panel1);
         frame.setSize(360, 360); // Tamaño de la ventana
         frame.setLocationRelativeTo(null);
 
-        reservarCita.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                RegistroCitas registroCitas = new RegistroCitas();
-                AgendarCita agendarCita = new AgendarCita(registroCitas);
-                agendarCita.mostrarVentana(usuario);
-            }
-        });
-        cambiarContraseña.addActionListener(new ActionListener() {
+        cambiarContraseñaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cambiarContraseñaActionPerformed(e);
             }
         });
-
         cerrarSesionButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
-                Users users = new Users(null);
+                LoginPeluquero loginPeluquero = new LoginPeluquero(null);
 
+            }
+
+        });
+        visualizarCitasButtom.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ControlCitas control = new ControlCitas();
+                control.mostrarVentanaCitas(empleado);
             }
 
         });
@@ -47,16 +47,17 @@ public class MenuUsuarios {
     }
 
     private void cambiarContraseñaActionPerformed(ActionEvent e) {
-        if (usuario != null) {
+        if (empleado != null) {
             String newPassword = JOptionPane.showInputDialog(frame, "Ingrese la nueva contraseña:");
 
             // Verifica si se ingresó una nueva contraseña
             if (newPassword != null) {
-                usuario.setContraseña(newPassword);
-                RegistroUsuarios.guardarUsuarios();
+                empleado.setContraseña(newPassword);
+
                 // Muestra un mensaje de éxito en una nueva ventana
                 JOptionPane.showMessageDialog(frame, "Contraseña cambiada correctamente");
-
+                RegistroEmpleados.guardarEmpleados();
+                System.out.println(empleado.getCodigo() + " " + empleado.getContraseña());
                 // Cierra la ventana actual después de cambiar la contraseña
             } else {
 
@@ -74,15 +75,14 @@ public class MenuUsuarios {
             public void run() {
 
                 JFrame frame = new JFrame("Menú de Usuarios");
-                MenuUsuarios menuUsuarios = new MenuUsuarios(frame,null);
+                MenuPeluqueros menuPeluqueros = new MenuPeluqueros(frame,null);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setContentPane(menuUsuarios.panel1);
-                frame.setSize(360, 360);
+                frame.setContentPane(menuPeluqueros.panel1);
+                frame.setSize(360, 240);
                 frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
             }
         });
     }
-
 
 }

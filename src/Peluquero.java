@@ -14,7 +14,6 @@ public class Peluquero extends Empleado{
 
     public int getContador(){ return Empleado.getNumerador();}
 
-
 }
 
 

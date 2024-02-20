@@ -29,8 +29,10 @@ public class LoginPeluquero extends JDialog {
                     empleadoLogeado = RegistroEmpleados.obtenerUsuario(peluqueroField1.getText(), new String(passwordField1.getPassword()));
                     if (empleadoLogeado != null) {
                         JOptionPane.showMessageDialog(LoginPeluquero.this, "¡Inicio de sesión exitoso!\nBienvenido");
-
+                        abrirMenuPeluqueros(empleadoLogeado);
                         System.out.println(empleadoLogeado.toString());
+                        dispose();
+
                         dispose();
                     } else {
                             JOptionPane.showMessageDialog(LoginPeluquero.this, "Usuario no encontrado o credenciales incorrectas. Verifica la información.");
@@ -40,7 +42,16 @@ public class LoginPeluquero extends JDialog {
         });
         setVisible(true);
     }
-
+    private void abrirMenuPeluqueros(Empleado empleadoLogeado) {
+        JFrame frame = new JFrame();
+        MenuPeluqueros menuPeluqueros = new MenuPeluqueros(frame, empleadoLogeado);
+        frame.setContentPane(menuPeluqueros.panel1);  // Accede directamente al campo panel1
+        frame.setSize(360, 360);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        setVisible(false);
+    }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {

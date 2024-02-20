@@ -38,8 +38,7 @@ public class MenuAdmin extends JDialog {
         visualizarEstadisticasDelNegocioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                RegistroCitas registroCitas = new RegistroCitas();
-                EstadisticasNegocio stats = new EstadisticasNegocio(frame, registroCitas);
+                EstadisticasNegocio stats = new EstadisticasNegocio();
                 stats.mostrarVentana();
             }
         });

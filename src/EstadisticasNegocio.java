@@ -1,29 +1,25 @@
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class EstadisticasNegocio {
     private JPanel panel1;
     private JComboBox<String> añoBox;
     private JComboBox<String> mesBox;
     private JComboBox<String> diaBox;
-    private JButton button1;
+    private JButton buscar;
     private JTable table1;
 
     private CustomTableModel tableModel;
-    private Empleado empleadoLogeado;
 
-    public EstadisticasNegocio(JFrame frame,RegistroCitas registroCitas ) {
+    public EstadisticasNegocio() {
         Object[][] initialData = {};  // Puedes ajustar según sea necesario
 
 
         // Resto del código...
 
         // Ejemplo de lógica para cambiar la estructura de la tabla
-        button1.addActionListener(new ActionListener() {
+        buscar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String año = (String) añoBox.getSelectedItem();
@@ -145,7 +141,6 @@ public class EstadisticasNegocio {
 
                 }
             }
-
             private String obtenerMes(int i){
                 if (i == 1){return "Enero";}
                 else if (i == 2){return "Febrero";}
@@ -183,7 +178,7 @@ public class EstadisticasNegocio {
             public void run() {
                 JFrame frame = new JFrame("LoginAdmin");
                 RegistroCitas citas = new RegistroCitas();
-                EstadisticasNegocio stats = new EstadisticasNegocio(frame, citas);
+                EstadisticasNegocio stats = new EstadisticasNegocio();
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setContentPane(stats.panel1);
                 frame.setSize(720, 720);

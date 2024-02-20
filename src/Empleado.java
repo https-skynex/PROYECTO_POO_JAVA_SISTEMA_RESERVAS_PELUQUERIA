@@ -49,17 +49,23 @@ public class Empleado implements Serializable {
         Empleado.numerador = numerador;
     }
 
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Empleado empleado = (Empleado) o;
-        return Objects.equals(codigo, empleado.codigo);  // Asegúrate de comparar todos los atributos relevantes
+        return Objects.equals(nombre, empleado.nombre) &&
+                Objects.equals(apellido, empleado.apellido) &&
+                Objects.equals(contraseña, empleado.contraseña) &&
+                Objects.equals(codigo, empleado.codigo);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(codigo);  // Asegúrate de incluir todos los atributos relevantes
     }
+
+
 }
 
 
