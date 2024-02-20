@@ -9,14 +9,14 @@ public class RegistroUsuarios {
     }
 
 
-    static public boolean verificarUsuario(String codigoUsuario, String contraseña){
+   /* static public boolean verificarUsuario(String codigoUsuario, String contraseña){
         for(Usuario usuario: listaUsuarios) {
             if (usuario.getCodigo().equals(codigoUsuario) && usuario.getContraseña().equals(contraseña)) {
                 return true;
             }
         }
         return false;
-        }
+        }*/
 
     static public Usuario obtenerUsuario(String codigoUsuario, String contraseña) {
         for (Usuario usuario : listaUsuarios) {

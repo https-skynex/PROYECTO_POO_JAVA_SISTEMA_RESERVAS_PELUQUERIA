@@ -1,7 +1,7 @@
 import java.io.Serializable;
 import java.util.Objects;
 
-public abstract class Empleado implements Serializable {
+public class Empleado implements Serializable {
     private String nombre;
     private String apellido;
     private String contraseña;

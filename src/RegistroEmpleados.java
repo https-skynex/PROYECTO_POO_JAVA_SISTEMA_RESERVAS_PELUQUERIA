@@ -20,6 +20,15 @@ public class RegistroEmpleados {
         return nombre + " " + apellido;
     }
 
+    static public Empleado obtenerUsuario(String codigoEmpleado, String contraseña) {
+        for (Empleado peluquero : listaEmpleados) {
+            if (peluquero.getCodigo().equals(codigoEmpleado) && peluquero.getContraseña().equals(contraseña)) {
+                return peluquero;
+            }
+        }
+        return null;
+    }
+
     static public void nuevoPeluquero(Peluquero peluquero){
         listaEmpleados.add(peluquero);
     }

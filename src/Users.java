@@ -69,7 +69,7 @@ public class Users extends JDialog {
     }
 
 
-    private void verificarUsuario() {
+    /*private void verificarUsuario() {
         String codigoUsuario = textField1.getText();
         String contraseña = textField2.getText();
         if (RegistroUsuarios.verificarUsuario(codigoUsuario,contraseña)) {
@@ -78,7 +78,7 @@ public class Users extends JDialog {
         }
 
         JOptionPane.showMessageDialog(this, "Usuario no encontrado o credenciales incorrectas. Verifica la información.");
-    }
+    }*/
 
     private void crearNuevoUsuario() {
 

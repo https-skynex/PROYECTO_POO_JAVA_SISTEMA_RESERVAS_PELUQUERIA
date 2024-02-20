@@ -14,6 +14,7 @@ public class EstadisticasNegocio {
     private JTable table1;
 
     private CustomTableModel tableModel;
+    private Empleado empleadoLogeado;
 
     public EstadisticasNegocio(JFrame frame,RegistroCitas registroCitas ) {
         Object[][] initialData = {};  // Puedes ajustar según sea necesario

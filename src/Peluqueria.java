@@ -8,7 +8,7 @@ public class Peluqueria {
         RegistroEmpleados.cargarEmpleados();
         RegistroEmpleados.cargarContadorE();
         RegistroCitas.cargarCitas();
-        //RegistroUsuarios.imprimirUsuarios();
+        RegistroUsuarios.imprimirUsuarios();
         RegistroEmpleados.imprimirEmpleados();
         System.out.println(RegistroEmpleados.cantidadEmpleados());
 
@@ -17,13 +17,10 @@ public class Peluqueria {
         //RegistroEmpleados.agregarPeluqueros();
         //RegistroCitas.mostrarCitas();
         //Admin.mostrarAdmin();
-      //Users users = new Users(null);
-      Admin.mostrarAdmin();
-        //RegistroCitas.mostrarCitas();
-
-
-
-
+      Users users = new Users(null);
+      //Admin.mostrarAdmin();
+      //  LoginPeluquero loginPeluquero = new LoginPeluquero(null);
+        RegistroCitas.mostrarCitas();
 
     }
 }
