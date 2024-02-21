@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 public class EstadisticasNegocio {
     private JPanel panel1;
@@ -9,11 +10,14 @@ public class EstadisticasNegocio {
     private JComboBox<String> diaBox;
     private JButton buscar;
     private JTable table1;
+    private JButton salirButton;
 
     private CustomTableModel tableModel;
 
     public EstadisticasNegocio() {
         Object[][] initialData = {};  // Puedes ajustar según sea necesario
+        tableModel = new CustomTableModel(initialData, new Object[]{"", "", ""});
+
 
 
         // Resto del código...
@@ -159,6 +163,38 @@ public class EstadisticasNegocio {
             }
 
         });
+
+        ActionListener comboBoxListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Vaciar la tabla
+                tableModel.setData(new Object[][]{});
+
+                // Obtener las selecciones de día, mes y año
+                String díaSeleccionado = (String) diaBox.getSelectedItem();
+                String mesSeleccionado = (String) mesBox.getSelectedItem();
+                String añoSeleccionado = (String) añoBox.getSelectedItem();
+
+                // Realizar las operaciones según sea necesario
+                // ...
+
+                // Actualizar la tabla con los nuevos datos
+                table1.setModel(tableModel);
+            }
+        };
+
+        salirButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(panel1);
+                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+            }
+        });
+
+        // Agregar el ActionListener a los JComboBox (dia, mes, año)
+        añoBox.addActionListener(comboBoxListener);
+        mesBox.addActionListener(comboBoxListener);
+        diaBox.addActionListener(comboBoxListener);
     }
 
 
@@ -166,7 +202,7 @@ public class EstadisticasNegocio {
         JFrame frame = new JFrame("Stats");
         frame.setContentPane(this.panel1);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(720, 720);
+        frame.setSize(720, 500);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
@@ -181,7 +217,7 @@ public class EstadisticasNegocio {
                 EstadisticasNegocio stats = new EstadisticasNegocio();
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setContentPane(stats.panel1);
-                frame.setSize(720, 720);
+                frame.setSize(720, 500);
                 frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
             }

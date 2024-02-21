@@ -64,7 +64,7 @@ public class RegistroCitas {
 
     static public void mostrarCitas(){
         for(Cita cita : listaCitas){
-            System.out.println(cita.toString());
+            System.out.println(cita.impresionCita());
         }
     }
 

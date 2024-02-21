@@ -92,8 +92,9 @@ public class ControlCitas {
         ActionListener comboBoxListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Vaciar la JComboBox de clientes
+                registroCitasPorEmpleado.clear();
                 clientes.removeAllItems();
+                actualizarTabla();
             }
         };
         salirButton.addActionListener(new ActionListener() {

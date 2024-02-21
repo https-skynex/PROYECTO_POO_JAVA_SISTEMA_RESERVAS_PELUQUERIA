@@ -15,12 +15,11 @@ public class Peluqueria {
         //System.out.println(RegistroEmpleados.getNombreEmpleado(0));
         //System.out.println(RegistroEmpleados.cantidadEmpleados());
         //RegistroEmpleados.agregarPeluqueros();
-        //RegistroCitas.mostrarCitas();
-        //Admin.mostrarAdmin();
-      //Users users = new Users(null);
-      Admin.mostrarAdmin();
-      //LoginPeluquero loginPeluquero = new LoginPeluquero(null);
         RegistroCitas.mostrarCitas();
 
+        //Users users = new Users(null);
+        Admin.mostrarAdmin();
+        //LoginPeluquero loginPeluquero = new LoginPeluquero(null);
+        RegistroCitas.mostrarCitas();
     }
 }
