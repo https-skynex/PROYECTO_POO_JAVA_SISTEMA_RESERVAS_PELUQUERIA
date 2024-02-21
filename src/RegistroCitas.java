@@ -83,25 +83,11 @@ public class RegistroCitas {
     }
 
 
-    public static int cantidadCitasPorEmpleado(String dia, String mes, String año, Empleado empleado) {
-        int suma = 0;
-        int añoC = Integer.parseInt(año);
-        int mesC = Integer.parseInt(mes);
-        int diaC = Integer.parseInt(dia);
-            for (Cita cita : listaCitas) {
-                if (empleado.equals(cita.getEmpleado()) &&
-                        diaC == cita.getDia() && mesC == cita.getMes() && añoC == cita.getAño()) {
-                    suma++;
-                }
-            }
-            return suma;
-    }
-
     static public int cantidadClientesMes(int mes, String año){
         int suma =0;
         int añoC = Integer.parseInt(año);
         for(Cita cita : listaCitas){
-            if(mes == cita.getMes() && añoC == cita.getAño()){
+            if(mes == cita.getMes() && añoC == cita.getAño() && cita.getEstado().equals("asistio")){
                 suma++;
             }
         }
@@ -112,7 +98,7 @@ public class RegistroCitas {
         double suma =0;
         int añoC = Integer.parseInt(año);
         for(Cita cita : listaCitas){
-            if(mes == cita.getMes() && añoC == cita.getAño()){
+            if(mes == cita.getMes() && añoC == cita.getAño() && cita.getEstado().equals("asistio")){
                 suma = suma + cita.getServicio().getPrecio();
             }
         }
@@ -124,7 +110,7 @@ public class RegistroCitas {
         int añoC = Integer.parseInt(año);
         int mesC = Integer.parseInt(mes);
         for(Cita cita : listaCitas){
-            if(dia == cita.getDia() &&  mesC == cita.getMes()&&añoC == cita.getAño()){
+            if(dia == cita.getDia() &&  mesC == cita.getMes() &&añoC == cita.getAño() && cita.getEstado().equals("asistio")){
                 suma++;
             }
         }
@@ -136,7 +122,7 @@ public class RegistroCitas {
         int añoC = Integer.parseInt(año);
         int mesC = Integer.parseInt(mes);
         for(Cita cita : listaCitas){
-            if(dia == cita.getDia() &&  mesC == cita.getMes()&&añoC == cita.getAño()){
+            if(dia == cita.getDia() &&  mesC == cita.getMes()&&añoC == cita.getAño() && cita.getEstado().equals("asistio")){
                 suma = suma + cita.getServicio().getPrecio();
             }
         }
@@ -151,7 +137,7 @@ public class RegistroCitas {
         if (nEmpleado >= 0 && nEmpleado < RegistroEmpleados.cantidadEmpleados()) {
             for(Cita cita : listaCitas){
                 if (RegistroEmpleados.getCodigoEmpleado(nEmpleado).equals(cita.getEmpleado().getCodigo()) &&
-                        diaC == cita.getDia() &&  mesC == cita.getMes() && añoC == cita.getAño()){
+                        diaC == cita.getDia() &&  mesC == cita.getMes() && añoC == cita.getAño() && cita.getEstado().equals("asistio")){
                     suma++;
                 }
             }
@@ -170,7 +156,7 @@ public class RegistroCitas {
         if (nEmpleado >= 0 && nEmpleado < RegistroEmpleados.cantidadEmpleados()) {
             for(Cita cita : listaCitas){
                 if (RegistroEmpleados.getCodigoEmpleado(nEmpleado).equals(cita.getEmpleado().getCodigo()) &&
-                        diaC == cita.getDia() &&  mesC == cita.getMes() && añoC == cita.getAño()){
+                        diaC == cita.getDia() &&  mesC == cita.getMes() && añoC == cita.getAño() && cita.getEstado().equals("asistio")){
                     suma = suma + cita.getServicio().getPrecio();
                 }
             }

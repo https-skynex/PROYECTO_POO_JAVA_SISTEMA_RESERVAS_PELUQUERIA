@@ -37,7 +37,10 @@ public class AgendarCita {
                 String dia = (String) diaBox.getSelectedItem();
                 String mes = (String) mesBox.getSelectedItem();
                 selectPeluquero.removeAllItems();
+                if(hora.isEmpty() || dia.isEmpty() || mes.isEmpty()) {
+                    JOptionPane.showMessageDialog(panel1, "Llenar los campos de hora, dia y mes", "Aviso", JOptionPane.WARNING_MESSAGE);
 
+                }else {
                     peluquerosDisponibles = RegistroCitas.peluquerosDisponibles(hora, dia, mes);
 
                     if (peluquerosDisponibles.size() == 0) {
@@ -55,7 +58,7 @@ public class AgendarCita {
                             selectPeluquero.addItem((Empleado) peluquero);
                         }
                     }
-
+                }
             }
         });
 
@@ -84,7 +87,7 @@ public class AgendarCita {
                         Cita nuevaCita = new Cita(usuario, empleadoSelect, servicioT, Integer.parseInt(hora), Integer.parseInt(dia), Integer.parseInt(mes));
                         RegistroCitas.agregarCita(nuevaCita);
                         RegistroCitas.guardarCitas();
-                        String mensaje = String.format("Cita guardada correctamente:\n%s", nuevaCita.toString());
+                        String mensaje = String.format("Cita guardada correctamente:\n%s", nuevaCita.impresionCita());
                         JOptionPane.showMessageDialog(panel1, mensaje, "Cita Guardada", JOptionPane.INFORMATION_MESSAGE);
 
                         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(panel1);

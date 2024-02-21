@@ -18,8 +18,8 @@ public class Peluqueria {
         //RegistroCitas.mostrarCitas();
         //Admin.mostrarAdmin();
       //Users users = new Users(null);
-      //Admin.mostrarAdmin();
-      LoginPeluquero loginPeluquero = new LoginPeluquero(null);
+      Admin.mostrarAdmin();
+      //LoginPeluquero loginPeluquero = new LoginPeluquero(null);
         RegistroCitas.mostrarCitas();
 
     }

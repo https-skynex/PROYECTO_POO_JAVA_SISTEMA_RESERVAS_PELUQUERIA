@@ -2,28 +2,32 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.awt.event.WindowEvent;
+import java.util.*;
 
 public class ControlCitas {
     private JPanel panel1;
-    private JComboBox añoBox;
-    private JComboBox mesBox;
-    private JComboBox diaBox;
+    private JComboBox<String> añoBox;
+    private JComboBox<String> mesBox;
+    private JComboBox<String> diaBox;
     private JButton buscarButton;
-    private JComboBox comboBox1;
+    private JComboBox<Cita> clientes;
     private JButton asistioButton;
     private JButton noAsistioButton;
     private JTable table1;
+    private JButton salirButton;
     private Frame frame;
     private CustomTableModel tableModel;
     private Empleado empleado;
     private ArrayList<Cita> registroCitasPorEmpleado;
 
-
     public ControlCitas() {
-
         Object[][] initialData = {};
 
+        // Inicializar el ArrayList
+        registroCitasPorEmpleado = new ArrayList<>();
+
+        // Acción del botón "Buscar"
         buscarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -32,61 +36,133 @@ public class ControlCitas {
                 String dia = (String) diaBox.getSelectedItem();
 
                 // Verificar si año o mes están vacíos
-                if ( año.isEmpty()  || mes.isEmpty() || dia.isEmpty()) {JOptionPane.showMessageDialog(panel1, "Llenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);    return;}
+                if (año.isEmpty() || mes.isEmpty() || dia.isEmpty()) {
+                    JOptionPane.showMessageDialog(panel1, "Llenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
 
-                    RegistroEmpleados.imprimirEmpleados();
-                    System.out.println(RegistroCitas.cantidadCitasPorEmpleado(dia, mes, año, empleado));
-                    registroCitasPorEmpleado = new ArrayList<Cita>();
-                    registroCitasPorEmpleado = RegistroCitas.citasPorEmpleados(dia, mes, año, empleado);
-                    Object[][] data = new Object[registroCitasPorEmpleado.size()+1][6];
-                    data [0][0] = "Codigo Cliente";
-                    data [0][1] = "Nombre";
-                    data [0][2] = "horario";
-                    data [0][3] = "Servicio";
-                    data [0][4] = "Precio";
-                    data [0][5] = "Confirmacion";
-                    int i = 0;
-                    for (Cita cita : registroCitasPorEmpleado) {
-                        i++;
-                        // Asignar los valores a cada celda del arreglo
-                        data[i][0] = cita.getUsuario().getCodigo();
-                        data[i][1] = cita.getUsuario().getNombre();
-                        data[i][2] = cita.getHora();
-                        data[i][3] = cita.getServicio().getNombre();
-                        data[i][4] = cita.getServicio().getPrecio();
-                        data[i][5] = cita.getEstado();
-                    }
-                    Object[] columnNames = {"Codigo de cliente", "Nombre", "horario ", "Servicio",
-                    "Precio", "Confirmacion"};
+                // Obtener las citas por empleado y fecha
 
-                    // Crear una nueva instancia de CustomTableModel con datos y nombres de columna
-                    tableModel = new CustomTableModel(data, columnNames);
+                registroCitasPorEmpleado = RegistroCitas.citasPorEmpleados(dia, mes, año, empleado);
+                Collections.sort(registroCitasPorEmpleado);
+                // Actualizar la JComboBox de clientes
+                actualizarClientes();
 
-                    // Establecer el modelo de la tabla
-                    table1.setModel(tableModel);
-
-                    // Notificar que los datos de la tabla han cambiado
-                    tableModel.setData(data);
-
-                    // Imprimir los valores de la matriz data
-                    /*for (int i = 0; i < data.length; i++) {
-                        for (int j = 0; j < data[i].length; j++) {
-                            System.out.print(data[i][j] + " ");
-                        }
-                        System.out.println();  // Salto de línea después de cada fila
-                    }*/
+                // Crear y establecer el modelo de la tabla
+                actualizarTabla();
             }
         });
+
+        asistioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Obtener la cita seleccionada en la JComboBox
+                Cita citaSeleccionada = (Cita) clientes.getSelectedItem();
+
+                // Verificar si se ha seleccionado una cita
+                if (citaSeleccionada != null) {
+                    // Actualizar el estado de la cita
+                    citaSeleccionada.setEstado("asistio");
+                    RegistroCitas.guardarCitas();
+                    // Actualizar la tabla
+                    actualizarTabla();
+                }
+            }
+        });
+
+        noAsistioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Obtener la cita seleccionada en la JComboBox
+                Cita citaSeleccionada = (Cita) clientes.getSelectedItem();
+
+                // Verificar si se ha seleccionado una cita
+                if (citaSeleccionada != null) {
+                    // Actualizar el estado de la cita
+                    citaSeleccionada.setEstado("no asistio");
+                    RegistroCitas.guardarCitas();
+                    // Actualizar la tabla
+                    actualizarTabla();
+                }
+            }
+        });
+
+
+        // Acción de cambio en JComboBox (dia, mes, año)
+        ActionListener comboBoxListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Vaciar la JComboBox de clientes
+                clientes.removeAllItems();
+            }
+        };
+        salirButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(panel1);
+                frame.dispatchEvent(new  WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+            }
+        });
+
+        // Agregar el ActionListener a los JComboBox (dia, mes, año)
+        añoBox.addActionListener(comboBoxListener);
+        mesBox.addActionListener(comboBoxListener);
+        diaBox.addActionListener(comboBoxListener);
     }
+
+    private void actualizarClientes() {
+        // Limpiar la JComboBox de clientes
+        clientes.removeAllItems();
+        int i = 0;
+        // Llenar la JComboBox con los nombres de los clientes
+        for (Cita cita : registroCitasPorEmpleado) {
+            i++;
+            clientes.addItem(cita);
+        }
+    }
+
+    private void actualizarTabla() {
+        // Crear los datos y nombres de columna para la tabla
+        Object[][] data = new Object[registroCitasPorEmpleado.size() + 1][7];
+        data[0] = new Object[]{"","Codigo Cliente", "Nombres", "horario", "Servicio", "Precio", "Confirmacion"};
+
+        int i = 0;
+        for (Cita cita : registroCitasPorEmpleado) {
+            i++;
+            // Asignar los valores a cada celda del arreglo
+            data[i] = new Object[]{
+                    i,
+                    cita.getUsuario().getCodigo(),
+                    cita.getUsuario().getNombre() + " " +cita.getUsuario().getApellido(),
+                    cita.getHora(),
+                    cita.getServicio().getNombre(),
+                    "$ " + cita.getServicio().getPrecio(),
+                    cita.getEstado()
+            };
+        }
+
+        Object[] columnNames = {"n","Codigo de cliente", "Nombre", "horario", "Servicio", "Precio", "Confirmacion"};
+
+        // Crear una nueva instancia de CustomTableModel con datos y nombres de columna
+        tableModel = new CustomTableModel(data, columnNames);
+
+        // Establecer el modelo de la tabla
+        table1.setModel(tableModel);
+
+        // Notificar que los datos de la tabla han cambiado
+        tableModel.setData(data);
+    }
+
     public void mostrarVentanaCitas(Empleado empleado) {
         this.empleado = empleado;
         JFrame frame = new JFrame("Stats");
         frame.setContentPane(this.panel1);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(720, 720);
+        frame.setSize(800, 720);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override

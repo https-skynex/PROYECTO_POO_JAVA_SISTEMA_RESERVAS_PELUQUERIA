@@ -2,7 +2,7 @@ import java.io.Serializable;
 import java.util.*;
 import java.io.Serializable;
 
-public class Cita implements Serializable {
+public class Cita implements Serializable, Comparable<Cita> {
     private Usuario usuario;
     private Empleado empleado;
     private Servicio servicio;
@@ -10,7 +10,7 @@ public class Cita implements Serializable {
     private int mes;
     private int hora;
     private int año = 2024;
-    private boolean estado;
+    private String estado = "";
 
 
     public Cita(Usuario usuario, Empleado empleado, Servicio servicio,int hora, int dia, int mes) {
@@ -44,11 +44,11 @@ public class Cita implements Serializable {
         return año;
     }
 
-    public boolean getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 
@@ -78,10 +78,19 @@ public class Cita implements Serializable {
         }
     }
 
-    @Override
-    public String toString(){
+    public String impresionCita(){
         return   "Cliente: " + usuario +"\nPeluquero: " + empleado + "\nServicio: " + servicio + "\nHora: " + hora + "\nDia: " + dia + "\nMes: " + mes;
 
     }
 
-}
+    public String toString(){
+        return "CodigoCliente: " + usuario.getCodigo()  + ", Horario: " + hora + ", Servicio: " + servicio.getNombre();
+    }
+
+    @Override
+    public int compareTo(Cita cita) {
+        return hora - cita.hora;
+    }
+    }
+
+
