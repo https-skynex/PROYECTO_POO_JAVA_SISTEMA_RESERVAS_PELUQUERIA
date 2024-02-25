@@ -16,10 +16,11 @@ public class Users extends JDialog {
         super(parent);
         setTitle("Login");
         setContentPane(login);
-        setMinimumSize(new Dimension(480, 480));
+        setMinimumSize(new Dimension(497, 497));
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setModal(true);
         setLocationRelativeTo(parent);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
 
 
 
@@ -34,7 +35,7 @@ public class Users extends JDialog {
 
                     usuarioLogueado = RegistroUsuarios.obtenerUsuario(textField1.getText(), new String(textField2.getPassword()));
                     if (usuarioLogueado != null) {
-                        JOptionPane.showMessageDialog(Users.this, "¡Inicio de sesión exitoso!\nBienvenido");
+                        JOptionPane.showMessageDialog(Users.this, "¡Inicio de sesión exitoso!\nBienvenido " + usuarioLogueado.getNombre());
                         abrirMenuUsuarios(usuarioLogueado);
                         System.out.println(usuarioLogueado.toString());
                         dispose();
@@ -61,7 +62,7 @@ public class Users extends JDialog {
         JFrame frame = new JFrame();
         MenuUsuarios menuUsuarios = new MenuUsuarios(frame, usuario);
         frame.setContentPane(menuUsuarios.panel1);  // Accede directamente al campo panel1
-        frame.setSize(360, 360);
+        frame.setSize(365, 360);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

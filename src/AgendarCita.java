@@ -123,23 +123,15 @@ public class AgendarCita {
             }
         });
 
-
-        // Otro código de inicialización si es necesario
     }
 
-
-
-
-    private void limpiarInterfaz() {
-        // Lógica para limpiar la interfaz después de guardar la cita
-    }
     public void mostrarVentana(Usuario usuario) {
         this.usuario = usuario;
        // servicios = new JComboBox<>(serviciosDisponibles.toArray(new Servicio[0]));
         JFrame frame = new JFrame("Agendar Cita");
         frame.setContentPane(this.panel1);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Cierra solo la ventana actual
-        frame.setSize(720, 720); // Establece el tamaño deseado
+        frame.setSize(650, 650); // Establece el tamaño deseado
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }

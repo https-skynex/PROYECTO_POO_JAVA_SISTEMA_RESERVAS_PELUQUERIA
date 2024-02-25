@@ -17,7 +17,7 @@ public class MenuAdmin extends JDialog {
         frame.setTitle("Menú de Usuarios");
 
         frame.setContentPane(menuAdmin);
-        frame.setSize(350, 250); // Tamaño de la ventana
+        frame.setSize(400, 250); // Tamaño de la ventana
         frame.setLocationRelativeTo(null);
         setLocationRelativeTo(frame);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -52,7 +52,7 @@ public class MenuAdmin extends JDialog {
         // Abrir la ventana de login de admin
         JFrame loginFrame = new JFrame("LoginAdmin");
         Admin admin = new Admin(loginFrame);
-        loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        loginFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         loginFrame.setContentPane(admin.panel1);
         loginFrame.setSize(400, 560);
         loginFrame.setLocationRelativeTo(null);
@@ -127,7 +127,7 @@ public class MenuAdmin extends JDialog {
                 MenuAdmin mAdmin = new MenuAdmin(frame);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setContentPane(mAdmin.menuAdmin);
-                frame.setSize(350, 250);
+                frame.setSize(400, 250);
                 frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
             }

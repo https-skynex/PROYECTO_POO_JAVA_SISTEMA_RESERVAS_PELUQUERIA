@@ -4,30 +4,24 @@ import java.util.*;
 public class RegistroCitas {
     static private ArrayList<Cita> listaCitas = new ArrayList<>();
 
-    static public ArrayList obtenerRegistroCitas(){
-        return listaCitas;
-    }
     static public void agregarCita(Cita cita) {
         if (!listaCitas.contains(cita)) {
-            System.out.println(cita.getServicio().toString());
             listaCitas.add(cita);
         } else {
-            System.out.println("Ya hay una cita registrada para ese peluquero, día y hora.");
+
         }
     }
 
 
     static public boolean choqueCitas (String hora1, String dia1, String mes1, Usuario usuario) {
-        System.out.println( hora1 + dia1 + mes1 + usuario);
+
         int hora = Integer.parseInt(hora1);
         int dia = Integer.parseInt(dia1);
         int mes = Integer.parseInt(mes1);
         boolean choque = false;
-        RegistroCitas.mostrarCitas();
         for (Cita cita : listaCitas) {
-            System.out.println(cita.getHora() + " " + cita.getDia()  + " " + cita.getMes() + " " + cita.getUsuario() );
+
             if (hora == cita.getHora() && dia == cita.getDia() && mes == cita.getMes() && usuario.equals(cita.getUsuario())) {
-                System.out.println("Si entro a choque : " + cita.getUsuario());
                 choque = true;
                 break;
             }
@@ -170,7 +164,6 @@ public class RegistroCitas {
     static public void guardarCitas() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("citas.txt"))) {
             oos.writeObject(listaCitas);
-            System.out.println("Citas guardadas correctamente.");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -181,7 +174,7 @@ public class RegistroCitas {
             listaCitas = (ArrayList<Cita>) ois.readObject();
             System.out.println("Citas cargadas correctamente. Total de citas: " + listaCitas.size());
         } catch (FileNotFoundException f) {
-            System.out.println("Base de datos no encontrada, creando nueva base");
+            System.out.println("Base de datos de citas no encontrada, creando nueva base");
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }

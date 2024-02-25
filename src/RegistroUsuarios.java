@@ -9,15 +9,6 @@ public class RegistroUsuarios {
     }
 
 
-   /* static public boolean verificarUsuario(String codigoUsuario, String contraseña){
-        for(Usuario usuario: listaUsuarios) {
-            if (usuario.getCodigo().equals(codigoUsuario) && usuario.getContraseña().equals(contraseña)) {
-                return true;
-            }
-        }
-        return false;
-        }*/
-
     static public Usuario obtenerUsuario(String codigoUsuario, String contraseña) {
         for (Usuario usuario : listaUsuarios) {
             if (usuario.getCodigo().equals(codigoUsuario) && usuario.getContraseña().equals(contraseña)) {
@@ -53,7 +44,7 @@ public class RegistroUsuarios {
             ois.close();
             fis.close();
         } catch (FileNotFoundException f){
-            System.out.println("Base de datos no encontrada, creando nueva base");
+            System.out.println("Base de datos de Usuarios no encontrada, creando nueva base");
         } catch (IOException ioe) {
             ioe.printStackTrace();
         } catch (ClassNotFoundException c) {

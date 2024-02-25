@@ -124,8 +124,8 @@ public class ControlCitas {
 
     private void actualizarTabla() {
         // Crear los datos y nombres de columna para la tabla
-        Object[][] data = new Object[registroCitasPorEmpleado.size() + 1][7];
-        data[0] = new Object[]{"","Codigo Cliente", "Nombres", "horario", "Servicio", "Precio", "Confirmacion"};
+        Object[][] data = new Object[registroCitasPorEmpleado.size() + 1][8];
+        data[0] = new Object[]{"","Codigo Cliente", "Nombres", "Telefono", "horario", "Servicio", "Precio", "Confirmacion"};
 
         int i = 0;
         for (Cita cita : registroCitasPorEmpleado) {
@@ -135,6 +135,7 @@ public class ControlCitas {
                     i,
                     cita.getUsuario().getCodigo(),
                     cita.getUsuario().getNombre() + " " +cita.getUsuario().getApellido(),
+                    cita.getUsuario().getNumeroTelefono(),
                     cita.getHora(),
                     cita.getServicio().getNombre(),
                     "$ " + cita.getServicio().getPrecio(),
@@ -142,7 +143,7 @@ public class ControlCitas {
             };
         }
 
-        Object[] columnNames = {"n","Codigo de cliente", "Nombre", "horario", "Servicio", "Precio", "Confirmacion"};
+        Object[] columnNames = {"n","Codigo de cliente", "Nombre", "Telefono", "horario", "Servicio", "Precio", "Confirmacion"};
 
         // Crear una nueva instancia de CustomTableModel con datos y nombres de columna
         tableModel = new CustomTableModel(data, columnNames);

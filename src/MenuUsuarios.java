@@ -13,7 +13,7 @@ public class MenuUsuarios {
         this.frame = frame;
         this.usuario = user;
         frame.setTitle("Menú de Usuarios");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setContentPane(panel1);
         frame.setSize(360, 360); // Tamaño de la ventana
         frame.setLocationRelativeTo(null);
@@ -30,20 +30,19 @@ public class MenuUsuarios {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cambiarContraseñaActionPerformed(e);
+
             }
         });
 
         cerrarSesionButton.addActionListener(new ActionListener(){
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
-                Users users = new Users(null);
-
+                Users usuario = new Users(null);
             }
 
         });
-
-        frame.setVisible(true);
     }
 
     private void cambiarContraseñaActionPerformed(ActionEvent e) {

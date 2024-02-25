@@ -39,12 +39,12 @@ public int getContador(){ return numerador;}
         this.contraseña = contraseña;
     }
 
-    public void setNumeroTelefono(String numeroTelefono){
-        this.numeroTelefono = numeroTelefono;
-    }
-
     public static void setNumerador(int numerador) {
         Usuario.numerador = numerador;
+    }
+
+    public String getNumeroTelefono() {
+        return numeroTelefono;
     }
 
     public String toString(){

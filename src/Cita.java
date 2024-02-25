@@ -70,16 +70,10 @@ public class Cita implements Serializable, Comparable<Cita> {
         return Objects.hash(empleado, dia, mes, hora);
     }
 
-    public Empleado empleadosDisponibles (int hora1, int dia1, int mes1){
-        if( hora == hora1 && dia == dia1 && mes == mes1 ){
-            return null;
-        }else{
-            return empleado;
-        }
-    }
+
 
     public String impresionCita(){
-        return   "Cliente: " + usuario +"\nPeluquero: " + empleado + "\nServicio: " + servicio + "\nHora: " + hora + "\nDia: " + dia + "\nMes: " + mes;
+        return   "Peluquero: " + empleado + "\nServicio: " + servicio + "\nHora: " + hora + "\nDia: " + dia + "\nMes: " + mes;
 
     }
 

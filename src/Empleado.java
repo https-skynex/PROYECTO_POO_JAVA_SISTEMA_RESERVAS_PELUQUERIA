@@ -1,7 +1,7 @@
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Empleado implements Serializable {
+public abstract class Empleado implements Serializable {
     private String nombre;
     private String apellido;
     private String contraseña;
@@ -13,10 +13,6 @@ public class Empleado implements Serializable {
         this. apellido = apellido;
         this.contraseña = contraseña;
         this.codigo = ""+getEspecialidad().charAt(0)+numerador;
-    }
-
-    public Empleado() {
-        codigo = null;
     }
 
     public String getNombre() {
@@ -38,7 +34,6 @@ public class Empleado implements Serializable {
     public String getCodigo() {
         return codigo;
     }
-
     public String getEspecialidad(){ return  null; }
 
     public static int getNumerador() {
@@ -64,8 +59,6 @@ public class Empleado implements Serializable {
     public int hashCode() {
         return Objects.hash(codigo);  // Asegúrate de incluir todos los atributos relevantes
     }
-
-
 }
 
 

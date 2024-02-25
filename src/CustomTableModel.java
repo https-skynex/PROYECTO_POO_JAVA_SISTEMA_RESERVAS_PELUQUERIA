@@ -5,14 +5,12 @@ public class CustomTableModel extends DefaultTableModel {
     private final Object[] columnNames;
     private Object[][] data;
 
-    // Constructor que recibe las columnas iniciales
+   //Constructor de la tabla modelo
     public CustomTableModel(Object[][] initialData, Object[] columnNames) {
         super(initialData, columnNames);
         this.data = initialData;
         this.columnNames = columnNames;
     }
-
-    // Método para cambiar la estructura de la tabla
 
     // Método para establecer nuevos datos en la tabla
     public void setData(Object[][] newData) {

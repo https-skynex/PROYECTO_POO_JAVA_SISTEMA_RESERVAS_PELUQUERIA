@@ -68,12 +68,12 @@ public class EstadisticasNegocio {
                     tableModel.setData(data);
 
                     // Imprimir los valores de la matriz data
-                    for (int i = 0; i < data.length; i++) {
+                   /* for (int i = 0; i < data.length; i++) {
                         for (int j = 0; j < data[i].length; j++) {
                             System.out.print(data[i][j] + " ");
                         }
                         System.out.println();  // Salto de línea después de cada fila
-                    }
+                    }*/
 
                 } else if ((dia == null || dia.isEmpty())&&(mes != null || !mes.isEmpty())) {
 
@@ -99,17 +99,17 @@ public class EstadisticasNegocio {
                     tableModel.setData(data);
 
                     // Imprimir los valores de la matriz data
-                    for (int i = 0; i < data.length; i++) {
+                    /*for (int i = 0; i < data.length; i++) {
                         for (int j = 0; j < data[i].length; j++) {
                             System.out.print(data[i][j] + " ");
                         }
                         System.out.println();  // Salto de línea después de cada fila
-                    }
+                    }*/
 
 
                 } else if ((dia != null ||! dia.isEmpty())&&(mes != null || !mes.isEmpty())){
-                    RegistroEmpleados.imprimirEmpleados();
-                    System.out.println(RegistroEmpleados.cantidadEmpleados());
+
+
 
                     Object[][] data = new Object[RegistroEmpleados.cantidadEmpleados()+1][4];
                     data [0][0] = "Codigo de empleado";
@@ -136,12 +136,12 @@ public class EstadisticasNegocio {
                     tableModel.setData(data);
 
                     // Imprimir los valores de la matriz data
-                    for (int i = 0; i < data.length; i++) {
+                   /* for (int i = 0; i < data.length; i++) {
                         for (int j = 0; j < data[i].length; j++) {
                             System.out.print(data[i][j] + " ");
                         }
                         System.out.println();  // Salto de línea después de cada fila
-                    }
+                    }*/
 
                 }
             }
@@ -202,7 +202,7 @@ public class EstadisticasNegocio {
         JFrame frame = new JFrame("Stats");
         frame.setContentPane(this.panel1);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(720, 500);
+        frame.setSize(720, 720);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
@@ -215,7 +215,7 @@ public class EstadisticasNegocio {
                 JFrame frame = new JFrame("LoginAdmin");
                 RegistroCitas citas = new RegistroCitas();
                 EstadisticasNegocio stats = new EstadisticasNegocio();
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 frame.setContentPane(stats.panel1);
                 frame.setSize(720, 500);
                 frame.setLocationRelativeTo(null);

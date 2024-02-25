@@ -39,7 +39,7 @@ public class RegistroEmpleados {
 
     static public void imprimirEmpleados(){
         for(Empleado empleado: listaEmpleados){
-            System.out.println(empleado.getCodigo() + " " + empleado.getContraseña());
+            System.out.println(empleado.getCodigo()+ " " + empleado.getNombre() + " " + empleado.getContraseña());
         }
     }
 
@@ -63,7 +63,7 @@ public class RegistroEmpleados {
             ois.close();
             fis.close();
         } catch (FileNotFoundException f){
-            System.out.println("Base de datos no encontrada, creando nueva base");
+            System.out.println("Base de datos de Empleado, creando nueva base");
         } catch (IOException ioe) {
             ioe.printStackTrace();
         } catch (ClassNotFoundException c) {
