@@ -12,22 +12,15 @@ public class Admin extends JDialog  {
         super(parent);
         this.parent = parent;
 
+
         iniciarSesiónButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 iniciarSesion();
-
             }
         });
 
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                cerrarVentana();
-            }
-        });
 
     }
     private void iniciarSesion() {
@@ -40,7 +33,6 @@ public class Admin extends JDialog  {
         } else {
             // Verifica las credenciales (puedes ajustar esta lógica según tus necesidades)
             if (verificarCredenciales(usuario, contraseña)) {
-                // Credenciales correctas, abre la interfaz MenuAdmin
                 JFrame menuFrame = new JFrame("MenuAdmin");
                 MenuAdmin menuAdmin = new MenuAdmin(menuFrame);
                 menuFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -57,21 +49,13 @@ public class Admin extends JDialog  {
         }
     }
 
-    // Método de ejemplo para verificar las credenciales (ajústalo según tus necesidades)
+
     private boolean verificarCredenciales(String usuario, char[] contraseña) {
-        // Lógica para verificar las credenciales
-        // Devuelve true si las credenciales son correctas, false de lo contrario
         return usuario.equals("admin") && new String(contraseña).equals("massimo");
     }
 
-    private void cerrarVentana() {
-        dispose();
-    }
-
-
-
     public static void mostrarAdmin() {
-        JFrame mainFrame = new JFrame("Admin Frame");
+        JFrame mainFrame = new JFrame("Admin");
         Admin admin = new Admin(mainFrame);
         mainFrame.setContentPane(admin.panel1);
         mainFrame.setSize(400, 560);

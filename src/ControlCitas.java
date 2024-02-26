@@ -157,7 +157,7 @@ public class ControlCitas {
 
     public void mostrarVentanaCitas(Empleado empleado) {
         this.empleado = empleado;
-        JFrame frame = new JFrame("Stats");
+        JFrame frame = new JFrame("Citas Peluqueros");
         frame.setContentPane(this.panel1);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(800, 720);
