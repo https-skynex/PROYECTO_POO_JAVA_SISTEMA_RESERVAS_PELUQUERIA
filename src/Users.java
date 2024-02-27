@@ -37,7 +37,7 @@ public class Users extends JDialog {
                     if (usuarioLogueado != null) {
                         JOptionPane.showMessageDialog(Users.this, "¡Inicio de sesión exitoso!\nBienvenido " + usuarioLogueado.getNombre());
                         abrirMenuUsuarios(usuarioLogueado);
-                        System.out.println(usuarioLogueado.toString());
+
                         dispose();
                     } else {
                         JOptionPane.showMessageDialog(Users.this, "Usuario no encontrado o credenciales incorrectas. Verifica la información.");

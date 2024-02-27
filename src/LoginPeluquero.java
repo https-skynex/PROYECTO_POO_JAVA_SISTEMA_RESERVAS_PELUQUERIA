@@ -30,7 +30,7 @@ public class LoginPeluquero extends JDialog {
                     if (empleadoLogeado != null) {
                         JOptionPane.showMessageDialog(LoginPeluquero.this, "¡Inicio de sesión exitoso!\nBienvenido");
                         abrirMenuPeluqueros(empleadoLogeado);
-                        System.out.println(empleadoLogeado.toString());
+
                         dispose();
 
                         dispose();

@@ -57,7 +57,7 @@ public class MenuPeluqueros {
                 // Muestra un mensaje de éxito en una nueva ventana
                 JOptionPane.showMessageDialog(frame, "Contraseña cambiada correctamente");
                 RegistroEmpleados.guardarEmpleados();
-                System.out.println(empleado.getCodigo() + " " + empleado.getContraseña());
+
                 // Cierra la ventana actual después de cambiar la contraseña
             } else {
 

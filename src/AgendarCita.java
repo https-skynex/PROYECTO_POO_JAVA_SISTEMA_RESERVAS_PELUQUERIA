@@ -144,7 +144,7 @@ public class AgendarCita {
         }
     }
     static void inicializarServicios(ArrayList<Servicio> serviciosDisponibles) {
-        serviciosDisponibles.add(new Servicio("Corte de pelo", 20.0));
+        serviciosDisponibles.add(new Servicio("Corte de pelo", 10.0));
         serviciosDisponibles.add(new Servicio("Tinte de cabello", 40.0));
         serviciosDisponibles.add(new Servicio("Tratamiento", 30.0));
         serviciosDisponibles.add(new Servicio("Rizado", 25.0));
